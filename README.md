@@ -2,11 +2,11 @@
 
 Full-stack e-commerce app built with a Java (Spring Boot) REST API and React frontend. Supports product management, multi-field search, pagination, and raw image streaming.
 
-[Live Demo](https://springmart.netlify.app/) · [GitHub](https://github.com/ShreyanDev5/SpringMart)
+[Live Demo](https://springmart.netlify.app/)
 
 ---
 
-## 📸 Preview
+## Preview
 
 | Home Page | Product Details | Add / Edit Product |
 | :---: | :---: | :---: |
@@ -14,7 +14,7 @@ Full-stack e-commerce app built with a Java (Spring Boot) REST API and React fro
 
 ---
 
-## ✨ Features
+## Features
 
 - **Product CRUD**: Create, view, update, and delete products with validation and partial update support.
 - **Multi-Field Search**: JPQL keyword search across name, description, category, and brand.
@@ -24,7 +24,7 @@ Full-stack e-commerce app built with a Java (Spring Boot) REST API and React fro
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Backend**: Java 21, Spring Boot 3.4.5, Spring Data JPA, Hibernate, H2 Database, Maven
 - **Frontend**: React 19, React Router, Sass, React Toastify, React Icons
@@ -33,7 +33,7 @@ Full-stack e-commerce app built with a Java (Spring Boot) REST API and React fro
 
 ---
 
-## 🏛️ Architecture
+## Architecture
 
 ```text
 HTTP Request ──> ProductController ──> ProductService ──> ProductRepository ──> H2 Database
@@ -46,7 +46,7 @@ HTTP Request ──> ProductController ──> ProductService ──> ProductRep
 
 ---
 
-## 🔌 API Reference
+## API Reference
 
 Base path: `/api`
 
@@ -63,7 +63,7 @@ Base path: `/api`
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 SpringMart/
@@ -75,7 +75,7 @@ SpringMart/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - **Java 21+**
@@ -109,7 +109,7 @@ docker compose up --build
 
 ---
 
-## 🌐 Deployment
+## Deployment
 
 - **Frontend**: [springmart.netlify.app](https://springmart.netlify.app/)
 - **Backend**: Hosted on [Render](https://render.com)
