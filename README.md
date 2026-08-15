@@ -2,7 +2,8 @@
 
 Full-stack e-commerce app built with a Java (Spring Boot) REST API and React frontend. Supports product management, multi-field search, pagination, and raw image streaming.
 
-[Live Demo](https://springmart.netlify.app/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-springmart.netlify.app-00ad9f?style=flat-square&logo=netlify&logoColor=white)](https://springmart.netlify.app/)
+[![API Status](https://img.shields.io/badge/API_Status-Render_Live-46E3B7?style=flat-square&logo=render&logoColor=121212)](https://springmart.netlify.app/)
 
 ---
 
@@ -113,3 +114,12 @@ docker compose up --build
 
 - **Frontend**: [springmart.netlify.app](https://springmart.netlify.app/)
 - **Backend**: Hosted on [Render](https://render.com)
+
+---
+
+## Author
+
+**Shreyan Sardar**
+- **Portfolio**: [shreyandev.vercel.app](https://shreyandev.vercel.app)
+- **GitHub**: [@ShreyanDev5](https://github.com/ShreyanDev5)
+- **LinkedIn**: [shreyansardar](https://www.linkedin.com/in/shreyansardar/)
