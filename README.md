@@ -30,7 +30,7 @@ Full-stack e-commerce app built with a Java (Spring Boot) REST API and React fro
 - **Backend**: Java 21, Spring Boot 3.4.5, Spring Data JPA, Hibernate, H2 Database, Maven
 - **Frontend**: React 19, React Router, Sass, React Toastify, React Icons
 - **Deployment & Infra**: Docker, Netlify (Frontend), Render (Backend)
-- **AI Tooling**: Frontend and UI built with AI agents (Antigravity, Cursor)
+- **AI Tooling**: Antigravity, Cursor (Frontend)
 
 ---
 
@@ -79,11 +79,13 @@ SpringMart/
 ## Getting Started
 
 ### Prerequisites
+
 - **Java 21+**
 - **Node.js 20+**
 - **Docker** (optional)
 
 ### 1. Backend
+
 ```bash
 cd springmart-backend
 
@@ -96,6 +98,7 @@ chmod +x mvnw && ./mvnw spring-boot:run
 - API: `http://localhost:8080` (H2 Console: `/h2-console`)
 
 ### 2. Frontend
+
 ```bash
 cd springmart-frontend
 npm install
@@ -104,6 +107,7 @@ npm start
 - App: `http://localhost:3000`
 
 ### 3. Docker (Backend Alternative)
+
 ```bash
 docker compose up --build
 ```
