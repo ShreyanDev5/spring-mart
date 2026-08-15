@@ -68,10 +68,26 @@ Base path: `/api`
 
 ```text
 SpringMart/
-├── springmart-backend/   # Java 21 / Spring Boot REST API
-├── springmart-frontend/  # React 19 SPA
-├── docker-compose.yml    # Docker setup for backend
-└── Dockerfile            # Multi-stage backend build
+├── springmart-backend/
+│   ├── src/main/java/com/backend/springmart/
+│   │   ├── config/             # CORS and web security configuration
+│   │   ├── controller/         # REST API endpoints (ProductController)
+│   │   ├── dto/                # Request and response DTO records
+│   │   ├── model/              # JPA database entities (Product)
+│   │   ├── repository/         # Spring Data JPA repositories
+│   │   └── service/            # Business logic and image byte handling
+│   ├── src/main/resources/     # Application properties and H2 DB config
+│   ├── Dockerfile              # Multi-stage backend Docker build
+│   └── pom.xml                 # Maven dependencies (Spring Boot, JPA)
+├── springmart-frontend/
+│   ├── src/
+│   │   ├── components/         # Reusable UI components (Navbar, Card)
+│   │   ├── pages/              # View pages (Home, ProductDetails, AddProduct)
+│   │   ├── styles/             # Sass styles and layout tokens
+│   │   └── App.jsx             # Client routing and main application state
+│   └── package.json            # Frontend dependencies (React 19, Sass)
+├── docker-compose.yml          # Container orchestration for backend
+└── README.md                   # Project documentation
 ```
 
 ---
