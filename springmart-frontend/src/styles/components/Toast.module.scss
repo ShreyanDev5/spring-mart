@@ -9,14 +9,15 @@
   max-width: 320px;
 
   @include respond-to(sm) {
-    width: auto;
-    min-width: 260px;
-    max-width: 300px;
-    padding: $spacing-sm;
+    width: calc(100vw - 2rem) !important;
+    min-width: 0 !important;
+    max-width: 340px !important;
+    padding: 0 !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
-    bottom: $spacing-md !important;
+    bottom: max(1.25rem, env(safe-area-inset-bottom, 1.25rem)) !important;
     top: auto !important;
+    box-sizing: border-box;
   }
 }
 
@@ -104,6 +105,13 @@
   border-radius: 4px;
   transition: all 0.2s ease;
   opacity: 0.5;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+
+  @include respond-to(sm) {
+    padding: 6px;
+    opacity: 0.7;
+  }
 
   svg {
     width: 12px;

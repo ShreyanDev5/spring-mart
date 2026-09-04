@@ -1,21 +1,20 @@
 // src/pages/NotFound.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import { FiHome } from "react-icons/fi";
+import { FiArrowLeft } from "react-icons/fi";
 import styles from "../styles/pages/NotFound.module.scss";
 
 function NotFound() {
     return (
         <div className={styles.notFoundContainer}>
             <div className={styles.content}>
-                <h1 className={styles.errorCode}>404</h1>
-                <h2 className={styles.title}>Page Not Found</h2>
+                <span className={styles.errorCode}>404</span>
+                <h1 className={styles.title}>Page not found</h1>
                 <p className={styles.message}>
-                    Oops! The page you're looking for seems to have wandered off.
-                    It might have been removed, renamed, or didn't exist in the first place.
+                    The page you are looking for doesn't exist or has been moved.
                 </p>
                 <Link to="/" className={styles.homeButton}>
-                    <FiHome /> Go Home
+                    <FiArrowLeft /> Return Home
                 </Link>
             </div>
         </div>

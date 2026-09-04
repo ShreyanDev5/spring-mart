@@ -1,6 +1,5 @@
-/* src/styles/global.scss */
 @use 'index' as *;
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
 
 * {
   margin: 0;
@@ -8,24 +7,39 @@
   box-sizing: border-box;
 }
 
+html,
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.47; /* Apple's exact line-height for optimal readability */
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
   color: $dark;
-  background-color: $white; /* Clean Apple white canvas */
+  background-color: $canvas; /* Rich warm gallery canvas */
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "kern" 1;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
   font-weight: 400;
 }
 
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-main {
+  flex: 1 0 auto;
+}
+
 .home-container {
-  max-width: 1024px; /* Standard Apple desktop content width */
+  max-width: $container-width;
   margin: 0 auto;
-  padding: 0 $spacing-md;
+  padding: 0 1.5rem;
   overflow: hidden;
+
+  @include respond-to(sm) {
+    padding: 0 1rem;
+  }
 }
 
 /* Section Wrapper */
@@ -73,11 +87,12 @@ body {
 
   &-outline {
     background-color: transparent;
-    border: 1px solid $primary;
-    color: $primary;
+    border: 1px solid $border-warm;
+    color: $dark;
 
     &:hover {
-      background-color: rgba(0, 102, 204, 0.04);
+      background-color: rgba(0, 0, 0, 0.03);
+      border-color: $dark;
     }
   }
 
@@ -86,7 +101,7 @@ body {
     color: $dark;
 
     &:hover {
-      background-color: darken($lighter-gray, 3%);
+      background-color: #eae8e1;
     }
   }
 
@@ -106,7 +121,7 @@ body {
     color: $white;
 
     &:hover {
-      background: darken($success, 5%);
+      background: #15803d;
     }
   }
 
@@ -115,7 +130,7 @@ body {
     color: $white;
 
     &:hover {
-      background: darken($error, 5%);
+      background: #b91c1c;
     }
   }
 }
@@ -154,22 +169,22 @@ body {
   }
 }
 
-/* Card Component - Squircled with light borders */
+/* Card Component - Squircled with warm light borders */
 .card {
   @include card-base;
   padding: $spacing-lg;
-  background: $white;
-  border-radius: 12px;
+  background: $surface;
+  border-radius: 14px;
   transition: $transition;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid $border-warm;
   box-shadow: $shadow-sm;
 
   &:hover {
-    box-shadow: $shadow-md;
+    box-shadow: $shadow;
   }
 }
 
-/* Form Elements - Incredibly clean and Apple-like */
+/* Form Elements - Incredibly clean and minimalist */
 .form-group {
   margin-bottom: $spacing-md;
 
@@ -184,10 +199,10 @@ body {
   .form-control {
     width: 100%;
     padding: 0.65rem 0.85rem;
-    border: 1px solid $light-gray;
+    border: 1px solid $border-warm;
     border-radius: 8px;
     font-size: 0.9rem;
-    background: $white;
+    background: $surface;
     transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     font-family: inherit;
     font-weight: 400;
@@ -203,8 +218,8 @@ body {
 
     &:focus {
       outline: none;
-      border-color: rgba(0, 102, 204, 0.5);
-      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+      border-color: $dark;
+      box-shadow: 0 0 0 3px rgba(24, 24, 27, 0.08);
     }
 
     &.is-invalid {

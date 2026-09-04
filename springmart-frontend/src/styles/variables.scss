@@ -1,45 +1,49 @@
 /* src/styles/variables.scss */
 // Apple-inspired minimalist design system variables
 
-// Primary Colors - Apple's signature blue and monochrome palette
-$primary: #0066cc; // Classic Apple Link Blue
-$primary-dark: #0044aa;
-$primary-light: #47a3ff;
-$primary-gradient: linear-gradient(180deg, #0077ff 0%, #0055cc 100%);
-$primary-gradient-subtle: linear-gradient(180deg, rgba(0, 102, 204, 0.03) 0%, rgba(0, 102, 204, 0.01) 100%);
+// Primary Colors - Modern minimalist ink and subtle accent palette
+$primary: #18181b; // Refined ink black
+$primary-dark: #09090b;
+$primary-light: #27272a;
+$primary-gradient: linear-gradient(180deg, #27272a 0%, #18181b 100%);
+$primary-gradient-subtle: linear-gradient(180deg, rgba(24, 24, 27, 0.03) 0%, rgba(24, 24, 27, 0.01) 100%);
 
-// Secondary & Accent Colors - Very reserved and premium
-$secondary: #86868b; // Apple secondary gray
-$secondary-dark: #6e6e73;
-$secondary-light: #a1a1a6;
-$secondary-gradient: linear-gradient(180deg, #86868b 0%, #6e6e73 100%);
+// Secondary & Accent Colors - Understated and modern
+$secondary: #71717a; // Balanced neutral gray
+$secondary-dark: #52525b;
+$secondary-light: #a1a1aa;
+$secondary-gradient: linear-gradient(180deg, #71717a 0%, #52525b 100%);
 
-$accent: #0066cc;
-$accent-dark: #0044aa;
-$accent-light: #47a3ff;
+$accent: #2563eb; // Clean cobalt accent for interactive links when needed
+$accent-dark: #1d4ed8;
+$accent-light: #3b82f6;
 
-// Neutral Colors - Apple's exact typography and surface colors
-$dark: #1d1d1f;       // Apple primary text (dark charcoal)
-$dark-gray: #515154;  // Apple secondary text
-$gray: #86868b;       // Apple system gray / tertiary text
-$light-gray: #d2d2d7; // Apple separator gray
-$lighter-gray: #f5f5f7; // Apple table/card background (very soft off-white)
-$light: #ffffff;      // Apple page background is pure white
+// Neutral Colors - Warm gallery canvas & crisp white surfaces
+$dark: #18181b;          // Primary text (deep charcoal ink)
+$dark-gray: #52525b;     // Secondary text
+$gray: #71717a;          // Muted text
+$light-gray: #e4e4e7;    // Crisp separator
+$lighter-gray: #eeece5;  // Inset warm surfaces
+$light: #ffffff;
 $white: #ffffff;
+$canvas: #f7f6f1;        // Rich warm gallery ivory canvas
+$surface: #ffffff;       // Clean elevated card surface
+$border-warm: #eae7df;   // Warm hairline border
+$border-subtle: rgba(0, 0, 0, 0.06);
 
 // Status Colors - Clean, subtle and accessible
-$success: #24b24b;
-$warning: #ff9f0a;
-$error: #ff3b30; // Apple red
-$info: #007aff;  // Apple system blue
+$success: #16a34a; // Refined emerald green
+$warning: #d97706; // Warm amber
+$error: #dc2626;   // Crisp crimson
+$info: #2563eb;
 
-// Shadows - Apple style: extremely soft, almost imperceptible depth, relies on borders/negative space
-$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
-$shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-$shadow-md: 0 8px 30px rgba(0, 0, 0, 0.06);
-$shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.08);
-$shadow-xl: 0 24px 50px rgba(0, 0, 0, 0.12);
-$shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+// Shadows - Natural, soft, featherweight ambient depth (no artificial blue glows)
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+$shadow: 0 4px 16px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+$shadow-md: 0 8px 24px rgba(0, 0, 0, 0.05), 0 2px 6px rgba(0, 0, 0, 0.02);
+$shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.02);
+$shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.08), 0 8px 20px rgba(0, 0, 0, 0.03);
+$shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.04);
 
 // Transitions - Apple style: buttery smooth, slightly longer duration, custom bezier
 $transition-fast: all 0.15s cubic-bezier(0.25, 1, 0.5, 1);

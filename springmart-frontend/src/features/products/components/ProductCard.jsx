@@ -102,37 +102,50 @@ function ProductCard({ product, imageVersion, onProductDelete }) {
                         loading="lazy"
                         ref={imgRef}
                     />
+                    <div className={styles.floatingActions}>
+                        <button
+                            type="button"
+                            className={`${styles.actionBtn} ${styles.editBtn}`}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                navigate(`/edit/${id}`);
+                            }}
+                            title="Edit product"
+                            aria-label={`Edit ${name}`}
+                        >
+                            <FiEdit />
+                        </button>
+                        <button
+                            type="button"
+                            className={`${styles.actionBtn} ${styles.deleteBtn}`}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setShowDeleteModal(true);
+                            }}
+                            title="Delete product"
+                            aria-label={`Delete ${name}`}
+                        >
+                            <FiTrash2 />
+                        </button>
+                    </div>
                 </div>
                 <div className={styles.productDetails}>
-                    <h3 title={name}>{name}</h3>
                     <div className={styles.metaInfo}>
                         <span className={styles.brand} title={brand}>
                             {brand}
                         </span>
-                        <span className={styles.separator}>•</span>
+                        <span className={styles.separator}>/</span>
                         <span className={styles.category} title={category}>
                             {category}
                         </span>
                     </div>
-                    <p className={styles.price} title={`₹${formattedPrice}`}>₹{formattedPrice}</p>
-                    <p className={`${styles.stock} ${inStock ? styles.in : styles.out}`} title={inStock ? "In Stock" : "Out of Stock"}>
-                        {inStock ? "In Stock" : "Out of Stock"}
-                    </p>
-                    <div className={styles.productActions}>
-                        <button
-                            className={`${styles.actionButton} ${styles.editButton}`}
-                            onClick={() => navigate(`/edit/${id}`)}
-                            aria-label={`Edit ${name}`}
-                        >
-                            <FiEdit /> Edit
-                        </button>
-                        <button
-                            className={`${styles.actionButton} ${styles.deleteButton}`}
-                            onClick={() => setShowDeleteModal(true)}
-                            aria-label={`Delete ${name}`}
-                        >
-                            <FiTrash2 /> Delete
-                        </button>
+                    <h3 className={styles.productTitle} title={name}>{name}</h3>
+                    <div className={styles.priceRow}>
+                        <span className={styles.price} title={`₹${formattedPrice}`}>₹{formattedPrice}</span>
+                        <span className={`${styles.stockBadge} ${inStock ? styles.inStock : styles.outOfStock}`}>
+                            <span className={styles.stockDot}></span>
+                            {inStock ? "In stock" : "Out of stock"}
+                        </span>
                     </div>
                 </div>
             </div>

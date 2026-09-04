@@ -1,0 +1,84 @@
+/* src/styles/components/Footer.module.scss */
+@use '../index' as *;
+
+.footer {
+  width: 100%;
+  border-top: 1px solid $border-warm;
+  background: transparent;
+  padding: 1.5rem 0;
+  margin-top: auto;
+}
+
+.footerContent {
+  max-width: $container-width;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: $secondary;
+
+  @include respond-to(sm) {
+    padding: 0 1rem;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .brand {
+    font-weight: 600;
+    color: $dark;
+    letter-spacing: -0.01em;
+  }
+
+  .dot {
+    color: $border-warm;
+    font-size: 0.9rem;
+  }
+
+  .tagline {
+    color: $dark-gray;
+    font-weight: 400;
+  }
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  .divider {
+    color: $border-warm;
+    font-size: 0.8rem;
+  }
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: $dark-gray;
+  text-decoration: none;
+  font-weight: 500;
+  transition: $transition-fast;
+
+  .icon {
+    font-size: 0.9em;
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    color: $dark;
+
+    .icon {
+      transform: translate(1px, -1px);
+    }
+  }
+}

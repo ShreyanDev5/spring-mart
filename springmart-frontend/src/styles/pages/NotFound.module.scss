@@ -6,7 +6,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 70vh;
+  min-height: 65vh;
   padding: $spacing-xl;
   text-align: center;
 
@@ -16,34 +16,35 @@
 }
 
 .content {
-  max-width: 440px;
-  animation: fadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  max-width: 400px;
+  animation: fadeIn 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .errorCode {
-  font-size: 5rem; /* Clean and crisp size */
+  font-size: 4.5rem;
   font-weight: 700;
   color: $secondary-light;
   margin: 0;
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
+  display: block;
 }
 
 .title {
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 1.75rem;
+  font-weight: 700;
   color: $dark;
   margin: $spacing-sm 0;
   letter-spacing: -0.025em;
 
   @include respond-to(sm) {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 }
 
 .message {
-  font-size: 0.95rem;
-  color: $dark-gray;
+  font-size: 0.92rem;
+  color: $secondary;
   margin: 0 0 $spacing-lg;
   line-height: 1.5;
 }
@@ -52,7 +53,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 0.5rem 1.25rem;
+  padding: 0.6rem 1.25rem;
   background: $primary;
   color: $white;
   text-decoration: none;
@@ -60,6 +61,7 @@
   font-weight: 500;
   font-size: 0.85rem;
   transition: $transition-fast;
+  box-shadow: $shadow-sm;
 
   &:hover {
     background: $primary-dark;
@@ -83,7 +85,7 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;

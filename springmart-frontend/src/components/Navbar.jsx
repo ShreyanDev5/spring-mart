@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import SearchBar from "../shared/components/SearchBar";
 import "../styles/Navbar.css";
 
-function Navbar({ onSearch }) {
+function Navbar({ searchQuery = "", onSearch, onClearSearch, onResetApp }) {
     const location = useLocation();
     const [isOpen, setIsOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -36,17 +36,39 @@ function Navbar({ onSearch }) {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Add handler for Home link
+    // Prevent background scrolling when mobile menu is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [isOpen]);
+
+    // Automatically close mobile menu on route changes
+    useEffect(() => {
+        setIsOpen(false);
+    }, [location.pathname]);
+
+    // Handler for Brand / Logo click
+    const handleLogoClick = (e) => {
+        e.preventDefault();
+        closeMenu();
+        if (onResetApp) {
+            onResetApp();
+        }
+    };
+
+    // Handler for Home link click
     const handleHomeClick = (e) => {
-        if (location.pathname === "/") {
-            // Already on home page
-            if (window.scrollY > 100) {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-            }
-            // Prevent navigation (no reload)
+        closeMenu();
+        if (onResetApp) {
+            onResetApp();
             e.preventDefault();
         }
-        // else, let Link handle navigation
     };
 
     return (
@@ -54,14 +76,7 @@ function Navbar({ onSearch }) {
             <nav className={`navbar ${isOpen ? 'is-open' : ''}`}>
                 <div className="navbar-content">
                     <div className="navbar-left">
-                        <Link to="/" className="logo" onClick={(e) => { 
-                            if (location.pathname === "/") {
-                                if (window.scrollY > 100) {
-                                    window.scrollTo({ top: 0, behavior: "smooth" });
-                                }
-                                e.preventDefault();
-                            }
-                        }}>
+                        <Link to="/" className="logo" onClick={handleLogoClick}>
                             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2.2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="logo-svg" style={{ marginRight: '4px', color: '#1d1d1f' }}>
                                 <circle cx="9" cy="20" r="1" fill="currentColor" />
                                 <circle cx="18" cy="20" r="1" fill="currentColor" />
@@ -71,17 +86,40 @@ function Navbar({ onSearch }) {
                         </Link>
                     </div>
 
-                    <div className="navbar-center">
-                        {/* Search bar only visible in header on desktop, not on mobile */}
+                    <div className="navbar-right">
+                        <div className="desktop-nav">
+                            <Link 
+                                to="/" 
+                                className={location.pathname === "/" ? "active" : ""}
+                                onClick={handleHomeClick}
+                            >
+                                Home
+                            </Link>
+                            <Link 
+                                to="/products" 
+                                className={location.pathname === "/products" ? "active" : ""}
+                            >
+                                Products
+                            </Link>
+                            <Link 
+                                to="/add" 
+                                className={location.pathname === "/add" ? "active" : ""}
+                            >
+                                Add Product
+                            </Link>
+                        </div>
+
                         {!isMobile && (
                             <div className="search-container">
-                                <SearchBar onSearch={onSearch} />
+                                <SearchBar 
+                                    searchQuery={searchQuery} 
+                                    onSearch={onSearch} 
+                                    onClear={onClearSearch} 
+                                />
                             </div>
                         )}
-                    </div>
 
-                    <div className="navbar-right">
-                        {/* Hamburger menu button (mobile only) - moved here to the right */}
+                        {/* Hamburger menu button (mobile only) */}
                         <button 
                             className={`hamburger ${isOpen ? 'is-active' : ''}`} 
                             onClick={toggleMenu}
@@ -92,44 +130,42 @@ function Navbar({ onSearch }) {
                                 <span className="hamburger-inner"></span>
                             </span>
                         </button>
-                        <div className="desktop-nav">
-                            <Link 
-                                to="/" 
-                                className={location.pathname === "/" ? "active" : ""}
-                                onClick={handleHomeClick}
-                            >
-                                Home
-                            </Link>
-                            <Link 
-                                to="/add" 
-                                className={location.pathname === "/add" ? "active" : ""}
-                            >
-                                Add Product
-                            </Link>
-                            <Link 
-                                to="/products" 
-                                className={location.pathname === "/products" ? "active" : ""}
-                            >
-                                View Products
-                            </Link>
-                        </div>
                     </div>
                 </div>
             </nav>
 
             {/* Mobile search and navigation (only visible on mobile) */}
             {isMobile && (
-                <div className={`mobile-menu ${isOpen ? 'show' : ''}`}>
+                <>
+                    {isOpen && (
+                        <div 
+                            className="mobile-backdrop" 
+                            onClick={closeMenu} 
+                            aria-hidden="true"
+                        />
+                    )}
+                    <div className={`mobile-menu ${isOpen ? 'show' : ''}`}>
                     <div className="mobile-search">
-                        <SearchBar onSearch={onSearch} />
+                        <SearchBar 
+                            searchQuery={searchQuery} 
+                            onSearch={(query) => { onSearch(query); closeMenu(); }} 
+                            onClear={onClearSearch} 
+                        />
                     </div>
                     <div className="mobile-links">
                         <Link 
                             to="/" 
                             className={location.pathname === "/" ? "active" : ""}
-                            onClick={(e) => { handleHomeClick(e); closeMenu(); }}
+                            onClick={handleHomeClick}
                         >
                             Home
+                        </Link>
+                        <Link 
+                            to="/products" 
+                            className={location.pathname === "/products" ? "active" : ""}
+                            onClick={closeMenu}
+                        >
+                            Products
                         </Link>
                         <Link 
                             to="/add" 
@@ -138,15 +174,9 @@ function Navbar({ onSearch }) {
                         >
                             Add Product
                         </Link>
-                        <Link 
-                            to="/products" 
-                            className={location.pathname === "/products" ? "active" : ""}
-                            onClick={closeMenu}
-                        >
-                            View Products
-                        </Link>
                     </div>
                 </div>
+                </>
             )}
         </>
     );

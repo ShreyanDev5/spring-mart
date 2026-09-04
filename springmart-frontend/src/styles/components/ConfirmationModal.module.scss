@@ -7,59 +7,67 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.35); /* Smooth minimal tint */
-  backdrop-filter: blur(10px); /* Deeper luxurious iOS-style blur */
-  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10050;
-  animation: fadeIn 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  animation: fadeIn 0.15s cubic-bezier(0.25, 1, 0.5, 1);
   padding: $spacing-md;
+
+  @include respond-to(sm) {
+    padding: 1rem;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom, 1rem));
+  }
 }
 
 .modalContent {
-  background: $white;
-  border-radius: 20px; /* Elegant squircle rounded corners */
+  background: $surface;
+  border-radius: 16px;
   padding: 1.75rem;
   width: 100%;
-  max-width: 320px; /* Compact premium dialog width */
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.04); /* Soft double-shadow stack */
-  animation: scaleIn 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  max-width: 340px;
+  box-shadow: $shadow-xl;
+  animation: scaleIn 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  border: 1px solid $border-warm;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.15rem;
   position: relative;
   overflow: hidden;
+
+  @include respond-to(sm) {
+    max-width: min(340px, 100%);
+    padding: 1.45rem 1.15rem;
+    border-radius: 14px;
+    gap: 1rem;
+  }
 }
 
 .iconWrapper {
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  border: 1px solid transparent;
 
   &.danger {
-    background: rgba(255, 59, 48, 0.04);
+    background: rgba(220, 38, 38, 0.08);
     color: $error;
-    border-color: rgba(255, 59, 48, 0.08);
   }
 
   &.warning {
-    background: rgba(255, 159, 10, 0.04);
+    background: rgba(217, 119, 6, 0.08);
     color: $warning;
-    border-color: rgba(255, 159, 10, 0.08);
   }
 
   &.info {
-    background: rgba(0, 102, 204, 0.04);
-    color: $primary;
-    border-color: rgba(0, 102, 204, 0.08);
+    background: rgba(24, 24, 27, 0.06);
+    color: $dark;
   }
 
   svg {
@@ -74,7 +82,7 @@
 
 .title {
   font-size: 1.15rem;
-  font-weight: 600;
+  font-weight: 700;
   color: $dark;
   margin: 0 0 6px 0;
   letter-spacing: -0.02em;
@@ -82,23 +90,23 @@
 
 .message {
   font-size: 0.84rem;
-  color: $dark-gray;
+  color: $secondary;
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
 .actions {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   justify-content: center;
   margin-top: 0.25rem;
 }
 
 .button {
   padding: 0.55rem $spacing-md;
-  border-radius: 8px; /* Smooth squircled buttons */
+  border-radius: 8px;
   font-weight: 500;
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   cursor: pointer;
   transition: $transition-fast;
   border: 1px solid transparent;
@@ -106,6 +114,15 @@
   align-items: center;
   justify-content: center;
   flex: 1;
+  min-height: 38px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+
+  @include respond-to(sm) {
+    min-height: 42px;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.86rem;
+  }
 
   &:disabled {
     opacity: 0.5;
@@ -115,17 +132,16 @@
 
 .cancelButton {
   background: transparent;
-  color: $secondary-dark;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: $dark;
+  border: 1px solid $border-warm;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.02);
+    background: rgba(0, 0, 0, 0.03);
     border-color: rgba(0, 0, 0, 0.15);
-    color: $dark;
   }
 
   &:active {
-    transform: scale(0.97);
+    transform: scale(0.98);
   }
 }
 
@@ -134,26 +150,24 @@
 
   &.danger {
     background: $error;
-    box-shadow: 0 4px 12px rgba(255, 59, 48, 0.18);
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.2);
 
     &:hover {
-      background: darken($error, 4%);
-      box-shadow: 0 6px 16px rgba(255, 59, 48, 0.25);
+      background: #b91c1c;
     }
   }
 
   &.primary {
     background: $primary;
-    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.18);
+    box-shadow: $shadow-sm;
 
     &:hover {
       background: $primary-dark;
-      box-shadow: 0 6px 16px rgba(0, 102, 204, 0.25);
     }
   }
 
   &:active {
-    transform: scale(0.97);
+    transform: scale(0.98);
   }
 }
 

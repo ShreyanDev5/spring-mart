@@ -3,45 +3,29 @@
 
 .hero {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: $spacing-xl;
-  padding: 3.5rem 0 1.5rem 0; /* Tightened gap to featured products */
-  min-height: 460px;
-  position: relative;
-  background: $white;
-  max-width: 1024px;
+  justify-content: center;
+  text-align: center;
+  padding: 4.25rem 1rem 0 1rem;
+  max-width: 760px;
   margin: 0 auto;
-  
-  @include respond-to(lg) {
-    flex-direction: column;
-    text-align: center;
-    padding: $spacing-xl $spacing-md;
-    gap: $spacing-xl;
+
+  @include respond-to(md) {
+    padding: 3rem 1rem 0 1rem;
+  }
+
+  @include respond-to(sm) {
+    padding: 2.5rem 0.5rem 0 0.5rem;
   }
 }
 
-/* Left Content Column */
 .heroContent {
-  flex: 1.15;
-  min-width: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-
-  @include respond-to(lg) {
-    align-items: center;
-  }
-}
-
-.heroLabel {
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 600;
-  color: $primary;
-  margin-bottom: $spacing-2xs;
+  align-items: center;
+  animation: fadeInUp 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 .heroTitle {
@@ -49,255 +33,44 @@
   font-weight: 700;
   line-height: 1.1;
   color: $dark;
-  letter-spacing: -0.03em;
-  margin-bottom: $spacing-xs;
+  letter-spacing: -0.035em;
+  margin-bottom: 1.15rem;
 
   @include respond-to(md) {
-    font-size: 2.75rem;
+    font-size: 2.6rem;
   }
 
   @include respond-to(sm) {
-    font-size: 2.15rem; /* Sized perfectly for mobile screens */
+    font-size: 2.1rem;
+    letter-spacing: -0.025em;
   }
-}
-
-.highlight {
-  color: $primary;
-  font-weight: 500;
 }
 
 .heroSubtitle {
-  font-size: 1.15rem;
-  color: $dark-gray;
-  line-height: 1.45;
-  margin-bottom: $spacing-lg;
-  max-width: 480px;
+  font-size: 1.1rem;
+  color: $secondary;
+  line-height: 1.55;
+  margin-bottom: 0;
+  max-width: 520px;
   font-weight: 400;
 
-  @include respond-to(lg) {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   @include respond-to(md) {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
-}
 
-/* CTA buttons as Apple-style text links */
-.ctaButtons {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-
-  @include respond-to(lg) {
-    justify-content: center;
-  }
-}
-
-.textLink,
-.textLinkSecondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.2rem;
-  font-size: 0.95rem;
-  font-weight: 450;
-  text-decoration: none;
-  transition: $transition;
-  color: $primary;
-
-  .chevron {
+  @include respond-to(sm) {
     font-size: 0.9rem;
-    transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
-  }
-
-  &:hover {
-    color: $primary-dark;
-    text-decoration: underline;
-
-    .chevron {
-      transform: translateX(3px);
-    }
+    line-height: 1.5;
   }
 }
 
-.textLinkSecondary {
-  color: $success;
-
-  &:hover {
-    color: darken(#27c93f, 15%);
-    text-decoration: underline;
-  }
-}
-
-/* Right Side - Apple-style Frosted Glass Window Mockup */
-.heroGraphic {
-  flex: 0.85;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-  
-  @include respond-to(lg) {
-    max-width: 400px;
-    margin: 0 auto;
-  }
-}
-
-.mockupContainer {
-  background: rgba(245, 245, 247, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 18px;
-  width: 100%;
-  max-width: 360px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
-  overflow: hidden;
-  position: relative;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-
-  &:hover {
-    transform: scale(1.02);
-  }
-}
-
-.windowHeader {
-  height: 30px;
-  background: rgba(0, 0, 0, 0.02);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-  gap: 6px;
-}
-
-.dotRed, .dotYellow, .dotGreen {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-.dotRed { background: #ff5f56; }
-.dotYellow { background: #ffbd2e; }
-.dotGreen { background: #27c93f; }
-
-.mockupContent {
-  padding: $spacing-md;
-}
-
-/* Apple-style Featured curated collection card with advanced hover effects */
-.previewCard {
-  background: $white;
-  border-radius: 12px;
-  padding: $spacing-md;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  cursor: pointer;
-
-  .badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: rgba(0, 102, 204, 0.08);
-    color: $primary;
-    font-size: 0.65rem;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 99px;
-  }
-
-  h3 {
-    font-size: 1.15rem;
-    color: $dark;
-    font-weight: 600;
-    margin-top: $spacing-xs;
-    margin-bottom: 4px;
-    transition: color 0.3s ease;
-  }
-
-  p {
-    font-size: 0.8rem;
-    color: $dark-gray;
-    line-height: 1.4;
-    margin-bottom: $spacing-md;
-  }
-
-  /* Polished lift & vibrant glow scale on hover */
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 102, 204, 0.08);
-    border-color: rgba(0, 102, 204, 0.15);
-
-    h3 {
-      color: $primary;
-    }
-
-    .glowEffect {
-      transform: scale(1.2);
-      opacity: 0.8;
-    }
-  }
-}
-
-.glowEffect {
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(0, 102, 204, 0.06) 0%, transparent 60%);
-  pointer-events: none;
-  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.cardFooter {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid rgba(0, 0, 0, 0.04);
-  padding-top: $spacing-xs;
-  font-size: 0.72rem;
-
-  .price {
-    font-weight: 600;
-    color: $dark;
-  }
-
-  .status {
-    color: $success;
-    font-weight: 500;
-  }
-}
-
-/* Apple-style smooth slide up animation */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-/* Minimal modern blinking final full stop */
-.blinkingDot {
-  color: inherit;
-  display: inline-block;
-  animation: blink 1.6s infinite ease-in-out;
-}
-
-@keyframes blink {
-  0%, 100% {
-    opacity: 0.15;
-  }
-  50% {
-    opacity: 1;
   }
 }

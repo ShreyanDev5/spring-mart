@@ -2,41 +2,74 @@
 @use '../../index' as *;
 
 .productsSection {
-  padding: 1.5rem 2rem 2.25rem 2rem; /* Moved heading upward by reducing top padding */
+  padding: 2.25rem 0 4rem 0;
   position: relative;
-  margin: 2rem auto; /* Tightened unified spacing */
+  margin: 0 auto;
   max-width: $container-width;
-  background: #fafafc; /* Apple-style extremely soft layered canvas */
-  border-radius: 24px; /* Smooth squirclish surface */
-  border: 1px solid rgba(0, 0, 0, 0.045); /* Defined bounds for contrast */
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.04), 0 3px 16px rgba(0, 0, 0, 0.02); /* Layered premium soft shadow */
+  scroll-margin-top: 76px;
 
   @include respond-to(md) {
-    padding: 1.5rem $spacing-sm;
-    margin: 1.5rem auto;
-    border-radius: 16px;
+    padding: 1.75rem 0 3rem 0;
+    scroll-margin-top: 68px;
   }
 }
 
-/* Apple-style section header */
-.sectionHeader {
-  margin-bottom: 1.25rem; /* Tightened spacing below the heading */
-  text-align: center;
+/* Category Filter Pills */
+.categoryFilters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 0 0.5rem;
+  animation: searchFiltersAppear 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 
-  h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    color: $dark;
-    letter-spacing: -0.02em;
-    margin-top: 0; /* Remove excessive top spacing above heading */
-    margin-bottom: 2px; /* Very slightly reduced spacing between heading & subheading */
+  @include respond-to(sm) {
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+    padding: 0;
+  }
+}
+
+.filterPill {
+  appearance: none;
+  background: $surface;
+  border: 1px solid $border-warm;
+  border-radius: 9999px;
+  padding: 0.45rem 1.15rem;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: $dark-gray;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  font-family: inherit;
+  line-height: 1.2;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+
+  @include respond-to(sm) {
+    padding: 0.38rem 0.95rem;
+    font-size: 0.8rem;
   }
 
-  p {
-    font-size: 0.95rem;
-    color: $dark-gray;
-    line-height: 1.4;
-    margin-top: 0;
+  &:hover {
+    border-color: rgba(0, 0, 0, 0.25);
+    color: $dark;
+    background: #ffffff;
+  }
+
+  &.activePill {
+    background: $primary;
+    border-color: $primary;
+    color: $white;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(24, 24, 27, 0.15);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
   }
 }
 
@@ -69,27 +102,112 @@
   margin-bottom: $spacing-md;
 }
 
-/* View All Link - Redesigned as clean, understated text link */
-.viewAllContainer {
-  grid-column: 1 / -1;
+/* Active Search Status Bar */
+.activeSearchBar {
   display: flex;
-  justify-content: center;
-  padding-top: $spacing-md;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0, 0, 0, 0.025);
+  border: 1px solid $border-warm;
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+  margin-bottom: 1.75rem;
+  font-size: 0.86rem;
+  color: $dark;
+  animation: searchBarAppear 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+
+  @include respond-to(sm) {
+    flex-direction: column;
+    gap: 0.65rem;
+    align-items: stretch;
+  }
 }
 
-.viewAllLink {
+.activeSearchText {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+
+  strong {
+    color: $dark;
+    font-weight: 600;
+  }
+}
+
+.resultCount {
+  color: $secondary;
+  font-size: 0.8rem;
+}
+
+.activeSearchActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+
+  @include respond-to(sm) {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+.clearSearchBtn {
   display: inline-flex;
   align-items: center;
-  gap: 0.2rem;
-  color: $primary;
-  font-weight: 400;
-  font-size: 0.85rem;
-  text-decoration: none;
-  transition: $transition;
+  gap: 5px;
+  background: $surface;
+  border: 1px solid $border-warm;
+  border-radius: 6px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: $dark;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+
+  @include respond-to(sm) {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.82rem;
+  }
 
   &:hover {
-    color: $primary-dark;
-    text-decoration: underline;
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.secondaryActionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: $secondary;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+
+  @include respond-to(sm) {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.82rem;
+  }
+
+  &:hover {
+    color: $dark;
+    background: rgba(0, 0, 0, 0.04);
   }
 }
 
@@ -99,31 +217,96 @@
   grid-column: 1 / -1;
   text-align: center;
   padding: $spacing-2xl $spacing-lg;
-  background: $white;
-  border-radius: $radius-lg;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  background: $surface;
+  border-radius: 12px;
+  border: 1px solid $border-warm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: $dark;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
 
   p {
-    font-size: 0.95rem;
-    color: $dark-gray;
-    margin-bottom: $spacing-md;
+    font-size: 0.88rem;
+    color: $secondary;
+    margin: 0;
+    max-width: 440px;
+    line-height: 1.5;
   }
 }
 
+.emptyStateActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.primaryActionBtn,
 .retryButton {
   display: inline-flex;
   align-items: center;
-  padding: 0.5rem 1.25rem;
+  padding: 0.55rem 1.25rem;
   background: $primary;
   color: $white;
   border: none;
-  border-radius: $radius-sm;
+  border-radius: 6px;
   font-weight: 500;
   font-size: 0.85rem;
   cursor: pointer;
-  transition: $transition;
+  transition: $transition-fast;
 
   &:hover {
     background: $primary-dark;
+  }
+}
+
+.outlineActionBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 1.25rem;
+  background: transparent;
+  color: $dark;
+  border: 1px solid $border-warm;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: $transition-fast;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+@keyframes searchBarAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes searchFiltersAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

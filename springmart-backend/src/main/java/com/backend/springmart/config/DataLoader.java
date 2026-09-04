@@ -11,10 +11,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * DataLoader is a configuration component that runs during application boot.
- * It seeds the relational database with realistic demo inventory items if the database is currently empty.
+ * It seeds the relational database with realistic demo inventory items if the database is currently empty,
+ * and self-heals existing demo records by synchronizing updated seed assets and missing items.
  * This guarantees an immediate out-of-the-box working catalog without requiring manual database initialization.
  */
 @Configuration
@@ -32,13 +36,9 @@ public class DataLoader
     {
         return args ->
         {
-            // Ensure idempotency: only insert seed records if the database has 0 items.
-            // This prevents duplicate keys and redundant database writes on successive restarts.
-            if (productRepository.count() == 0)
-            {
-                // A functional helper that extracts binary image bytes from the classpath (src/main/resources).
-                // Uses Java's try-with-resources to automatically close the InputStream, preventing resource leaks.
-                java.util.function.Function<String, byte[]> loadImage = resourcePath ->
+            // A functional helper that extracts binary image bytes from the classpath (src/main/resources).
+            // Uses Java's try-with-resources to automatically close the InputStream, preventing resource leaks.
+            Function<String, byte[]> loadImage = resourcePath ->
                 {
                     Resource res = new ClassPathResource(resourcePath);
                     try (InputStream is = res.getInputStream())
@@ -176,12 +176,58 @@ public class DataLoader
                                 "image/png",
                                 loadImage.apply("images/shoe.png")));
 
+            List<Product> existingProducts = productRepository.findAll();
+
+            if (existingProducts.isEmpty())
+            {
                 productRepository.saveAll(demoProducts);
-                System.out.println("✅ Database was empty. Successfully loaded 9 demo products with seed images.");
+                System.out.println("✅ Database was empty. Successfully loaded " + demoProducts.size() + " demo products with seed images.");
             }
             else
             {
-                System.out.println("ℹ️ Products already exist in H2 database. Skipping seed execution.");
+                // Self-healing synchronization:
+                // When modern seed images are added or updated in the repository codebase, existing local persistent H2
+                // databases may retain legacy image filenames and byte payloads.
+                // We synchronize existing seed items with the latest assets and re-seed any missing demo products without altering user products.
+                Map<String, Product> existingByName = existingProducts.stream()
+                        .collect(Collectors.toMap(Product::getName, p -> p, (p1, p2) -> p1));
+
+                boolean modified = false;
+                for (Product demo : demoProducts)
+                {
+                    Product existing = existingByName.get(demo.getName());
+                    if (existing != null)
+                    {
+                        boolean needsImageUpdate = !demo.getImageName().equals(existing.getImageName())
+                                || existing.getImageData() == null
+                                || existing.getImageData().length == 0;
+
+                        if (needsImageUpdate && demo.getImageData() != null)
+                        {
+                            existing.setImageName(demo.getImageName());
+                            existing.setImageType(demo.getImageType());
+                            existing.setImageData(demo.getImageData());
+                            productRepository.save(existing);
+                            modified = true;
+                            System.out.println("🔄 Updated seed image for product: " + existing.getName() + " -> " + demo.getImageName());
+                        }
+                    }
+                    else
+                    {
+                        productRepository.save(demo);
+                        modified = true;
+                        System.out.println("➕ Re-seeded missing demo product: " + demo.getName());
+                    }
+                }
+
+                if (modified)
+                {
+                    System.out.println("✅ Successfully synchronized demo catalog with latest seed assets.");
+                }
+                else
+                {
+                    System.out.println("ℹ️ Products already exist in H2 database and are up-to-date. Skipping seed execution.");
+                }
             }
         };
     }

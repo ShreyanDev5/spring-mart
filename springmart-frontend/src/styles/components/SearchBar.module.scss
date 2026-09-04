@@ -4,19 +4,25 @@
 .searchBar {
   display: flex;
   align-items: center;
-  background: rgba(0, 0, 0, 0.04);
-  border: 1px solid transparent;
-  border-radius: $radius-sm; /* More squared, Apple-like */
-  padding: 2px 2px 2px 8px;
-  transition: $transition;
-  height: 32px; /* Apple nav search is super compact */
-  width: 100%;
-  max-width: 320px;
+  background: rgba(0, 0, 0, 0.035);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 8px;
+  padding: 0 10px;
+  transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  height: 34px;
+  width: 210px;
+  position: relative;
+
+  &:hover {
+    border-color: rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.045);
+  }
 
   &:focus-within {
-    border-color: rgba(0, 102, 204, 0.5);
-    background: $white;
-    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+    border-color: $dark;
+    background: $surface;
+    box-shadow: 0 0 0 3px rgba(24, 24, 27, 0.06);
+    width: 340px;
   }
 }
 
@@ -24,10 +30,10 @@
   flex-shrink: 0;
   color: $secondary;
   font-size: 0.85rem;
-  transition: color 0.2s ease;
+  transition: color 0.15s ease;
 
   .searchBar:focus-within & {
-    color: $primary;
+    color: $dark;
   }
 }
 
@@ -35,45 +41,58 @@
   flex: 1;
   background: transparent;
   border: none;
-  padding: 0 8px;
+  padding: 0 0 0 8px;
   color: $dark;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   height: 100%;
   min-width: 0;
   outline: none;
   font-family: inherit;
 
+  @include respond-to(md) {
+    font-size: 16px;
+  }
+
   &::placeholder {
-    color: $gray;
+    color: $secondary-light;
   }
 }
 
-.searchButton {
+.clearButton {
   flex-shrink: 0;
-  background: $primary;
-  color: $white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.08);
   border: none;
-  padding: 0 10px;
-  height: 26px;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: 500;
   cursor: pointer;
-  transition: $transition;
-  font-family: inherit;
+  color: $dark;
+  padding: 0;
+  margin-left: 4px;
+  transition: all 0.15s ease;
 
   &:hover {
-    background: $primary-dark;
+    background: rgba(0, 0, 0, 0.16);
+    color: #000000;
   }
 
-  &:active {
-    transform: scale(0.97);
+  svg {
+    width: 11px;
+    height: 11px;
   }
 }
 
 /* Responsive */
 @include respond-to(md) {
   .searchBar {
+    width: 100%;
     max-width: 100%;
+
+    &:focus-within {
+      width: 100%;
+    }
   }
 }

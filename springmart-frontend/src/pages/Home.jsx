@@ -4,7 +4,7 @@ import { Hero } from "../components/home";
 import Products from "../components/home/Products";
 import { getFeaturedProducts, searchProducts } from "../features/products/api";
 
-function Home({ searchQuery, imageVersion, refreshTrigger = 0 }) {
+function Home({ searchQuery = "", onClearSearch, resetToken = 0, imageVersion, refreshTrigger = 0 }) {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
@@ -21,7 +21,7 @@ function Home({ searchQuery, imageVersion, refreshTrigger = 0 }) {
             try {
                 const nextProducts = searchQuery.trim()
                     ? await searchProducts(searchQuery)
-                    : await getFeaturedProducts(3);
+                    : await getFeaturedProducts(12);
 
                 if (isMounted) {
                     setProducts(nextProducts);
@@ -62,8 +62,19 @@ function Home({ searchQuery, imageVersion, refreshTrigger = 0 }) {
         }
 
         const scrollTimer = setTimeout(() => {
-            productsSectionRef.current?.scrollIntoView({ behavior: "smooth" });
-        }, 100);
+            if (productsSectionRef.current) {
+                // Offset accounting for 54px sticky navbar + 22px buffer so message is fully visible
+                const navbarHeight = 54;
+                const buffer = 22;
+                const elementTop = productsSectionRef.current.getBoundingClientRect().top;
+                const targetScrollY = elementTop + window.pageYOffset - (navbarHeight + buffer);
+
+                window.scrollTo({
+                    top: Math.max(0, targetScrollY),
+                    behavior: "smooth",
+                });
+            }
+        }, 120);
 
         return () => clearTimeout(scrollTimer);
     }, [searchQuery]);
@@ -71,16 +82,19 @@ function Home({ searchQuery, imageVersion, refreshTrigger = 0 }) {
     return (
         <div className="home-container">
             <Hero />
-            <section ref={productsSectionRef} className="section">
+            <div ref={productsSectionRef}>
                 <Products 
                     products={products} 
+                    searchQuery={searchQuery}
+                    onClearSearch={onClearSearch}
+                    resetToken={resetToken}
                     loading={loading} 
                     error={error} 
                     imageVersion={imageVersion}
                     onProductDelete={handleReload}
                     onRetry={handleReload}
                 />
-            </section>
+            </div>
         </div>
     );
 }

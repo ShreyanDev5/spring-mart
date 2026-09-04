@@ -4,24 +4,31 @@
 .productCard {
   @include card-base;
   overflow: hidden;
-  transition: $transition;
+  transition: $transition-fast;
   display: flex;
   flex-direction: column;
   height: 100%;
   position: relative;
-  background: $white;
-  border: 1px solid rgba(0, 0, 0, 0.045); /* Defined boundaries for modern contrast */
+  background: $surface;
+  border: 1px solid $border-warm;
   border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04), 0 2px 10px rgba(0, 0, 0, 0.02); /* Rich, layered modern shadow */
+  box-shadow: $shadow-sm;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 
   &:hover,
   &.touchHover {
-    transform: translateY(-6px); /* Energetic premium lift */
-    box-shadow: 0 20px 38px rgba(0, 102, 204, 0.12), 0 4px 16px rgba(0, 0, 0, 0.04); /* Double-layered interactive glow shadow */
-    border-color: rgba(0, 102, 204, 0.22);
+    transform: translateY(-3px);
+    border-color: rgba(0, 0, 0, 0.14);
+    box-shadow: $shadow-md;
 
     .productImage {
-      transform: scale(1.02);
+      transform: scale(1.03);
+    }
+
+    .floatingActions {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }
@@ -29,13 +36,14 @@
 /* Product Image Container */
 .imageContainer {
   width: 100%;
-  height: 220px;
+  height: 210px;
   overflow: hidden;
-  background: #fdfdfd; /* Clean product shot background */
+  background: $surface;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.02);
+  position: relative;
+  border-bottom: 1px solid $border-warm;
 }
 
 .productImage {
@@ -43,37 +51,94 @@
   height: 100%;
   object-fit: contain;
   display: block;
-  padding: $spacing-md;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  padding: 1.25rem;
+  mix-blend-mode: multiply;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Floating Action Pills */
+.floatingActions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 6px;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+
+  @include respond-to(md) {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.actionBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: $dark;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  font-size: 0.85rem;
+
+  @include respond-to(sm) {
+    width: 34px;
+    height: 34px;
+    font-size: 0.9rem;
+  }
+
+  &:hover {
+    transform: scale(1.06);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.editBtn:hover {
+  background: $primary;
+  color: $white;
+  border-color: $primary;
+}
+
+.deleteBtn:hover {
+  background: $error;
+  color: $white;
+  border-color: $error;
 }
 
 /* Product Details */
 .productDetails {
-  padding: 1.25rem;
+  padding: 1rem 1.15rem;
   display: flex;
   flex-direction: column;
   flex: 1;
-
-  h3 {
-    font-size: 1rem;
-    font-weight: 500;
-    color: $dark;
-    margin-bottom: 0.25rem;
-    line-height: 1.3;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+  gap: 0.3rem;
 }
 
-/* Meta Info */
+/* Meta Info (Brand / Category) */
 .metaInfo {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 0.75rem;
-  font-size: 0.75rem;
-  color: $secondary-light;
+  gap: 5px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: $secondary;
+  font-weight: 600;
 }
 
 .brand,
@@ -82,129 +147,64 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: $secondary;
 }
 
 .separator {
-  color: rgba(0, 0, 0, 0.15);
+  color: $secondary-light;
   font-size: 0.7rem;
   user-select: none;
 }
 
-.metaIcon {
-  flex-shrink: 0;
-  font-size: 0.7rem;
-  color: $secondary-light;
-}
-
-/* Price */
-.price {
-  font-size: 1.2rem;
+/* Title */
+.productTitle {
+  font-size: 0.95rem;
   font-weight: 600;
   color: $dark;
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.01em;
+  line-height: 1.35;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.015em;
 }
 
-/* Stock Status - Minimal Apple design style */
-.stock {
-  font-size: 0.75rem;
-  font-weight: 400;
-  margin-bottom: 1.25rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: $secondary;
-
-  &::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    display: inline-block;
-  }
-
-  &.in {
-    color: $secondary;
-    &::before {
-      background-color: $success;
-    }
-  }
-
-  &.out {
-    color: $secondary;
-    &::before {
-      background-color: $error;
-    }
-  }
-}
-
-/* Action Buttons - Sophisticated & understated */
-.productActions {
+/* Price & Stock Row */
+.priceRow {
   display: flex;
-  gap: $spacing-xs;
+  justify-content: space-between;
+  align-items: center;
   margin-top: auto;
-  border-top: 1px solid rgba(0, 0, 0, 0.04);
-  padding-top: 0.75rem;
+  padding-top: 0.5rem;
 }
 
-.actionButton {
-  flex: 1;
+.price {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: $dark;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.015em;
+}
+
+.stockBadge {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: 0.5rem $spacing-xs;
-  border-radius: $radius-sm;
-  font-size: 0.75rem;
+  gap: 5px;
+  font-size: 0.72rem;
   font-weight: 500;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: $transition-fast;
-
-  &:active {
-    transform: scale(0.97);
-  }
+  color: $secondary;
 }
 
-.editButton {
-  background: rgba(0, 102, 204, 0.04);
-  color: $primary;
-  border-color: rgba(0, 102, 204, 0.1);
-
-  &:hover {
-    background: rgba(0, 102, 204, 0.08);
-    border-color: rgba(0, 102, 204, 0.2);
-  }
+.stockDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  display: inline-block;
 }
 
-.deleteButton {
-  background: rgba(255, 59, 48, 0.04);
-  color: $error;
-  border-color: rgba(255, 59, 48, 0.1);
-
-  &:hover {
-    background: rgba(255, 59, 48, 0.08);
-    border-color: rgba(255, 59, 48, 0.2);
-  }
+.inStock .stockDot {
+  background-color: $success;
 }
 
-/* Responsive */
-@include respond-to(md) {
-  .productDetails {
-    padding: $spacing-sm;
-
-    h3 {
-      font-size: 0.95rem;
-    }
-  }
-
-  .price {
-    font-size: 1.1rem;
-  }
-
-  .actionButton {
-    font-size: 0.7rem;
-    padding: 0.4rem 0.5rem;
-  }
+.outOfStock .stockDot {
+  background-color: $error;
 }

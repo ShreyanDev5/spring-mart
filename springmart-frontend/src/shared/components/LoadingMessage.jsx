@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import { FiInfo, FiX } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 import styles from "../../styles/components/LoadingMessage.module.scss";
 
-function LoadingMessage({ onDismiss, onRetry, message = "Waking Up the Store" }) {
+function LoadingMessage({
+    onDismiss,
+    message = "Waking up backend server...",
+    subtitle = "Render free tier spins down when idle • First load may take 60–120s",
+}) {
     const [isVisible, setIsVisible] = useState(true);
 
     function handleDismiss() {
         setIsVisible(false);
-
         if (onDismiss) {
             onDismiss();
         }
@@ -19,45 +22,32 @@ function LoadingMessage({ onDismiss, onRetry, message = "Waking Up the Store" })
 
     return (
         <div className={styles.loadingMessage}>
-            {/* Elegant horizontal loading progress bar at the top */}
             <div className={styles.progressBar}>
                 <div className={styles.progressFill}></div>
             </div>
 
             <div className={styles.loadingContent}>
-                {/* Premium custom Apple-style infinite rotation loader */}
                 <div className={styles.loaderContainer}>
                     <svg viewBox="0 0 24 24" fill="none" className={styles.spinnerSvg}>
-                        <circle cx="12" cy="12" r="10" stroke="rgba(0, 102, 204, 0.12)" strokeWidth="2.5" />
-                        <path d="M12 2a10 10 0 0 1 10 10" stroke="#0066cc" strokeWidth="2.5" strokeLinecap="round" />
+                        <circle cx="12" cy="12" r="10" stroke="rgba(24, 24, 27, 0.12)" strokeWidth="2.5" />
+                        <path d="M12 2a10 10 0 0 1 10 10" stroke="#18181b" strokeWidth="2.5" strokeLinecap="round" />
                     </svg>
                 </div>
 
                 <div className={styles.textContainer}>
                     <h4 className={styles.message}>{message}</h4>
-                    <p className={styles.timeInfo}>This may take a moment (~2 min.)</p>
+                    {subtitle && <p className={styles.timeInfo}>{subtitle}</p>}
                 </div>
 
-                <div className={styles.actions}>
-                    {onDismiss && (
-                        <button
-                            className={styles.dismissButton}
-                            onClick={handleDismiss}
-                            aria-label="Dismiss loading message"
-                        >
-                            <FiX />
-                        </button>
-                    )}
-                </div>
-            </div>
-
-            <div className={styles.renderInfo}>
-                <div className={styles.infoIcon}>
-                    <FiInfo />
-                </div>
-                <div className={styles.infoText}>
-                    <p>Backend hosted on Render’s free tier. The first request after inactivity may take ~2 minutes to wake up.</p>
-                </div>
+                {onDismiss && (
+                    <button
+                        className={styles.dismissButton}
+                        onClick={handleDismiss}
+                        aria-label="Dismiss loading message"
+                    >
+                        <FiX />
+                    </button>
+                )}
             </div>
         </div>
     );
