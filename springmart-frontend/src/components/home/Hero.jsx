@@ -11,7 +11,7 @@ const Hero = () => {
         </h1>
         
         <p className={styles.heroSubtitle}>
-          Browse items, check live stock, and find what you need.
+          Browse items, check live stock, and add your favorite products.
         </p>
       </div>
     </section>

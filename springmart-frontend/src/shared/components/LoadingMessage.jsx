@@ -5,7 +5,7 @@ import styles from "../../styles/components/LoadingMessage.module.scss";
 function LoadingMessage({
     onDismiss,
     message = "Connecting to server...",
-    subtitle = "Free server wakes up on first load. This can take 1–2 minutes.",
+    subtitle = "The free server sleeps when idle. Please allow 1–2 minutes—it loads automatically.",
 }) {
     const [isVisible, setIsVisible] = useState(true);
 

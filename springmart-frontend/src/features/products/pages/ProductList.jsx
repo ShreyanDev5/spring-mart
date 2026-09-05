@@ -88,7 +88,7 @@ function ProductList({ searchQuery = "", onClearSearch, imageVersion, refreshTri
                 <div className={styles.loadingContainer}>
                     <LoadingMessage
                         message={normalizedSearchQuery ? `Searching for "${normalizedSearchQuery}"...` : "Connecting to server..."}
-                        subtitle={normalizedSearchQuery ? "Looking for matching products..." : "Free server wakes up on first load. This can take 1–2 minutes."}
+                        subtitle={normalizedSearchQuery ? "Looking for matching products..." : "The free server sleeps when idle. Please allow 1–2 minutes—it loads automatically."}
                         onRetry={handleReload}
                     />
                 </div>

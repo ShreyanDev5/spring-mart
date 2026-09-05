@@ -100,7 +100,7 @@ const Products = React.forwardRef(({
               <div className={styles.loadingContainer}>
                 <LoadingMessage 
                   message={searchQuery ? `Searching for "${searchQuery}"...` : "Connecting to server..."} 
-                  subtitle={searchQuery ? "Looking for matching products..." : "Free server wakes up on first load. This can take 1–2 minutes."}
+                  subtitle={searchQuery ? "Looking for matching products..." : "The free server sleeps when idle. Please allow 1–2 minutes—it loads automatically."}
                   onRetry={onRetry}
                 />
               </div>
