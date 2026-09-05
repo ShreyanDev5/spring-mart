@@ -7,6 +7,10 @@
   background: transparent;
   padding: 1.5rem 0;
   margin-top: auto;
+
+  @include respond-to(sm) {
+    padding: 1.15rem 0;
+  }
 }
 
 .footerContent {
@@ -16,13 +20,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.85rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+  line-height: 1.4;
   color: $secondary;
 
   @include respond-to(sm) {
     padding: 0 1rem;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem;
     text-align: center;
   }
 }
@@ -36,16 +42,20 @@
     font-weight: 600;
     color: $dark;
     letter-spacing: -0.01em;
+    font-size: inherit;
   }
 
   .dot {
     color: $border-warm;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    line-height: 1;
+    user-select: none;
   }
 
   .tagline {
     color: $dark-gray;
     font-weight: 400;
+    font-size: inherit;
   }
 }
 
@@ -56,7 +66,9 @@
 
   .divider {
     color: $border-warm;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    line-height: 1;
+    user-select: none;
   }
 }
 
@@ -67,10 +79,12 @@
   color: $dark-gray;
   text-decoration: none;
   font-weight: 500;
+  font-size: inherit;
   transition: $transition-fast;
 
   .icon {
-    font-size: 0.9em;
+    font-size: 0.85rem;
+    display: inline-block;
     transition: transform 0.2s ease;
   }
 

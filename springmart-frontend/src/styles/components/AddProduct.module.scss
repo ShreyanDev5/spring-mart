@@ -12,7 +12,7 @@
   }
 
   @include respond-to(sm) {
-    padding: 1.25rem 0.75rem;
+    padding: 1rem 0.75rem 2rem 0.75rem;
   }
 }
 
@@ -28,6 +28,11 @@
   @include respond-to(md) {
     font-size: 1.65rem;
     margin-bottom: 1.25rem;
+  }
+
+  @include respond-to(sm) {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
   }
 }
 
@@ -53,7 +58,8 @@
   }
 
   @include respond-to(sm) {
-    padding: 1.25rem;
+    padding: 1.25rem 1rem;
+    border-radius: 12px;
   }
 
   &.loading {
@@ -79,11 +85,20 @@
   }
 }
 
-.columnLeft,
+.columnLeft {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .columnRight {
   display: flex;
   flex-direction: column;
   height: 100%;
+
+  @include respond-to(md) {
+    margin-top: 1.25rem;
+  }
 }
 
 .formRow {
@@ -416,14 +431,18 @@
 .actionSection {
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
+
+  @include respond-to(md) {
+    margin-top: 0.25rem;
+  }
 }
 
 .publishNotice {
   font-size: 0.76rem;
   color: $secondary-light;
   text-align: center;
-  margin: 0 0 0.55rem 0;
+  margin: 0 0 0.45rem 0;
   line-height: 1.3;
   letter-spacing: -0.005em;
 }
@@ -451,7 +470,7 @@
   -webkit-tap-highlight-color: transparent;
 
   @include respond-to(md) {
-    margin-top: 0.5rem;
+    margin-top: 0;
     margin-bottom: 0;
   }
 

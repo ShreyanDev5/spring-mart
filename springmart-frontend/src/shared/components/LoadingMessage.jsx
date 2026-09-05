@@ -27,13 +27,6 @@ function LoadingMessage({
             </div>
 
             <div className={styles.loadingContent}>
-                <div className={styles.loaderContainer}>
-                    <svg viewBox="0 0 24 24" fill="none" className={styles.spinnerSvg}>
-                        <circle cx="12" cy="12" r="10" stroke="rgba(24, 24, 27, 0.12)" strokeWidth="2.5" />
-                        <path d="M12 2a10 10 0 0 1 10 10" stroke="#18181b" strokeWidth="2.5" strokeLinecap="round" />
-                    </svg>
-                </div>
-
                 <div className={styles.textContainer}>
                     <h4 className={styles.message}>{message}</h4>
                     {subtitle && <p className={styles.timeInfo}>{subtitle}</p>}
