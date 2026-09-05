@@ -71,7 +71,7 @@ Base path: `/api`
 ## Project Structure
 
 ```text
-SpringMart/
+spring-mart/
 ├── springmart-backend/
 │   ├── src/main/java/com/backend/springmart/
 │   │   ├── config/             # CORS & app configuration

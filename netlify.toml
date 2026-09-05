@@ -11,3 +11,4 @@
 [build.environment]  
   NODE_VERSION = "20"  
   NPM_FLAGS = "--legacy-peer-deps" 
+  REACT_APP_API_BASE_URL = "https://springmart-backend.onrender.com"
