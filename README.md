@@ -3,7 +3,7 @@
 Full-stack product catalog built with Spring Boot and React. Features product management, multi-field search, pagination, and direct image streaming.
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-springmart.netlify.app-00ad9f?style=flat-square&logo=netlify&logoColor=white)](https://springmart.netlify.app/)
-[![API Status](https://img.shields.io/badge/API_Status-Render_Live-46E3B7?style=flat-square&logo=render&logoColor=121212)](https://springmart.netlify.app/)
+[![API Status](https://img.shields.io/badge/API_Status-Render_Live-46E3B7?style=flat-square&logo=render&logoColor=121212)](https://springmart-backend.onrender.com/api/)
 
 ---
 
@@ -128,7 +128,7 @@ docker compose up --build
 ## Deployment
 
 - **Frontend**: [springmart.netlify.app](https://springmart.netlify.app/)
-- **Backend**: Hosted on [Render](https://render.com)
+- **Backend**: [springmart-backend.onrender.com](https://springmart-backend.onrender.com/api/)
 
 ---
 
