@@ -138,13 +138,11 @@ export function getFriendlyProductErrorMessage(error, fallbackMessage) {
     const rawMessage = error?.payload?.message || error?.message || fallbackMessage;
 
     if (rawMessage.includes("Failed to fetch")) {
-        return "Network error: Failed to connect to the server. Please check if the backend is running or if the uploaded file is too large.";
+        return "Could not reach server. Check your connection or try a smaller image.";
     }
 
     if (rawMessage.includes("Cannot deserialize value of type `java.lang.Integer`")) {
-        const match = rawMessage.match(/from String "(.*?)"/);
-        const receivedValue = match ? match[1] : "a decimal value";
-        return `Invalid input: Expected an integer (whole number), but received "${receivedValue}". Please enter a value without decimals, e.g., "10".`;
+        return "Please enter a whole number without decimals.";
     }
 
     return rawMessage;

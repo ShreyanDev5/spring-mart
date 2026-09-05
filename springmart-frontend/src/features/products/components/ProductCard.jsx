@@ -78,12 +78,12 @@ function ProductCard({ product, imageVersion, onProductDelete }) {
                 showSuccessToast("Product deleted");
                 onProductDelete?.();
             } else if (status === 404) {
-                showErrorToast("Product not found. It may have already been deleted.");
+                showErrorToast("Product not found.");
             } else {
-                showErrorToast("Unexpected response from server.");
+                showErrorToast("Could not delete product.");
             }
         } catch {
-            showErrorToast("Failed to delete product. Please try again.");
+            showErrorToast("Could not delete product. Please try again.");
         } finally {
             setIsDeleting(false);
             setShowDeleteModal(false);
@@ -154,8 +154,8 @@ function ProductCard({ product, imageVersion, onProductDelete }) {
                 isOpen={showDeleteModal}
                 onClose={() => setShowDeleteModal(false)}
                 onConfirm={handleConfirmDelete}
-                title="Delete Product?"
-                message={`Are you sure you want to delete "${name}"? This action cannot be undone.`}
+                title="Delete product"
+                message={`Are you sure you want to delete "${name}"? This cannot be undone.`}
                 confirmText="Delete"
                 cancelText="Cancel"
                 type="danger"

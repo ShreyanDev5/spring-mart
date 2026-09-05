@@ -11,10 +11,10 @@ function NotFound() {
                 <span className={styles.errorCode}>404</span>
                 <h1 className={styles.title}>Page not found</h1>
                 <p className={styles.message}>
-                    The page you are looking for doesn't exist or has been moved.
+                    This page doesn't exist or was moved.
                 </p>
                 <Link to="/" className={styles.homeButton}>
-                    <FiArrowLeft /> Return Home
+                    <FiArrowLeft /> Back to home
                 </Link>
             </div>
         </div>

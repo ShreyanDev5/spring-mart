@@ -53,7 +53,7 @@ function ProductList({ searchQuery = "", onClearSearch, imageVersion, refreshTri
                     loadProducts(pageToLoad, replace, retryCount + 1);
                 }, 8000);
             } else {
-                const errorMessage = requestError?.message || "Failed to load products. Please try again later.";
+                const errorMessage = requestError?.message || "Could not load products. Please try again.";
                 setError(errorMessage);
                 if (replace) {
                     setProducts([]);
@@ -83,12 +83,12 @@ function ProductList({ searchQuery = "", onClearSearch, imageVersion, refreshTri
         return (
             <div className={styles.productListContainer}>
                 <h1 className={styles.pageTitle}>
-                    {normalizedSearchQuery ? `Search Results for "${normalizedSearchQuery}"` : "All Products"}
+                    {normalizedSearchQuery ? `Results for "${normalizedSearchQuery}"` : "All Products"}
                 </h1>
                 <div className={styles.loadingContainer}>
                     <LoadingMessage
-                        message={normalizedSearchQuery ? `Searching for "${normalizedSearchQuery}"...` : "Waking up backend server..."}
-                        subtitle={normalizedSearchQuery ? "Filtering catalog items..." : "Render free tier spins down when idle • First load takes 60–120s"}
+                        message={normalizedSearchQuery ? `Searching for "${normalizedSearchQuery}"...` : "Connecting to server..."}
+                        subtitle={normalizedSearchQuery ? "Looking for matching products..." : "Free server wakes up on first load. This can take 1–2 minutes."}
                         onRetry={handleReload}
                     />
                 </div>
@@ -105,10 +105,10 @@ function ProductList({ searchQuery = "", onClearSearch, imageVersion, refreshTri
         return (
             <div className={styles.productListContainer}>
                 <h1 className={styles.pageTitle}>
-                    {normalizedSearchQuery ? `Search Results for "${normalizedSearchQuery}"` : "All Products"}
+                    {normalizedSearchQuery ? `Results for "${normalizedSearchQuery}"` : "All Products"}
                 </h1>
                 <ErrorState
-                    title="Failed to Load Products"
+                    title="Could not load products"
                     description={error}
                     onRetry={handleReload}
                 />
@@ -122,18 +122,8 @@ function ProductList({ searchQuery = "", onClearSearch, imageVersion, refreshTri
                 {normalizedSearchQuery ? (
                     <div className={styles.headerContainer}>
                         <h1 className={styles.pageTitle}>
-                            Search Results for "{normalizedSearchQuery}"
+                            Results for "{normalizedSearchQuery}"
                         </h1>
-                        {onClearSearch && (
-                            <button
-                                type="button"
-                                className={styles.clearSearchBtn}
-                                onClick={onClearSearch}
-                                title="Clear search"
-                            >
-                                Clear search <FiX />
-                            </button>
-                        )}
                     </div>
                 ) : (
                     <h1 className={styles.pageTitle}>All Products</h1>
@@ -163,15 +153,15 @@ function ProductList({ searchQuery = "", onClearSearch, imageVersion, refreshTri
                     {normalizedSearchQuery ? (
                         products.length > 0 ? (
                             <>
-                                <h3>No "{normalizedSearchQuery}" found in {selectedCategory}</h3>
-                                <p>We found {products.length} matching product{products.length === 1 ? "" : "s"} in other categories.</p>
+                                <h3>No results for "{normalizedSearchQuery}" in {selectedCategory}</h3>
+                                <p>Found {products.length} match{products.length === 1 ? "" : "es"} in other categories.</p>
                                 <div className={styles.emptyStateActions}>
                                     <button
                                         type="button"
                                         className={styles.primaryActionBtn}
                                         onClick={() => setSelectedCategory("All")}
                                     >
-                                        View in All Categories ({products.length})
+                                        View all categories ({products.length})
                                     </button>
                                     {onClearSearch && (
                                         <button
@@ -186,8 +176,8 @@ function ProductList({ searchQuery = "", onClearSearch, imageVersion, refreshTri
                             </>
                         ) : (
                             <>
-                                <h3>No products found for "{normalizedSearchQuery}"</h3>
-                                <p>We couldn't find any products matching your search across all categories.</p>
+                                <h3>No products found</h3>
+                                <p>Nothing matched "{normalizedSearchQuery}". Try another search term.</p>
                                 {onClearSearch && (
                                     <div className={styles.emptyStateActions}>
                                         <button
@@ -195,7 +185,7 @@ function ProductList({ searchQuery = "", onClearSearch, imageVersion, refreshTri
                                             className={styles.primaryActionBtn}
                                             onClick={onClearSearch}
                                         >
-                                            Clear search & view all products
+                                            Clear search
                                         </button>
                                     </div>
                                 )}
@@ -203,8 +193,8 @@ function ProductList({ searchQuery = "", onClearSearch, imageVersion, refreshTri
                         )
                     ) : (
                         <>
-                            <h3>No products in "{selectedCategory}"</h3>
-                            <p>There are no products listed in this category at this time.</p>
+                            <h3>No products in {selectedCategory}</h3>
+                            <p>Nothing has been added to this category yet.</p>
                             {selectedCategory !== "All" && (
                                 <div className={styles.emptyStateActions}>
                                     <button
@@ -212,7 +202,7 @@ function ProductList({ searchQuery = "", onClearSearch, imageVersion, refreshTri
                                         className={styles.primaryActionBtn}
                                         onClick={() => setSelectedCategory("All")}
                                     >
-                                        Show All Categories
+                                        Show all categories
                                     </button>
                                 </div>
                             )}
@@ -228,7 +218,7 @@ function ProductList({ searchQuery = "", onClearSearch, imageVersion, refreshTri
             {normalizedSearchQuery ? (
                 <div className={styles.headerContainer}>
                     <h1 className={styles.pageTitle}>
-                        Search Results for "{normalizedSearchQuery}"
+                        Results for "{normalizedSearchQuery}"
                     </h1>
                     {onClearSearch && (
                         <button
@@ -268,7 +258,7 @@ function ProductList({ searchQuery = "", onClearSearch, imageVersion, refreshTri
 
             {loading && page > 0 && (
                 <div className={styles.loadingContainer}>
-                    <LoadingMessage message="Waking Up the Store" onRetry={() => loadProducts(page, false)} />
+                    <LoadingMessage message="Loading more products..." onRetry={() => loadProducts(page, false)} />
                 </div>
             )}
             <div className={styles.productGrid}>
@@ -284,7 +274,7 @@ function ProductList({ searchQuery = "", onClearSearch, imageVersion, refreshTri
             {!normalizedSearchQuery && selectedCategory === "All" && hasMore && !loading && (
                 <div className={styles.loadMoreContainer}>
                     <button onClick={() => setPage((currentPage) => currentPage + 1)} className={styles.loadMoreButton}>
-                        Load More
+                        Load more
                     </button>
                 </div>
             )}

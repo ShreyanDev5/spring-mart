@@ -47,7 +47,7 @@ function EditProduct({ onProductUpdate }) {
                 }
             } catch {
                 if (isMounted) {
-                    showErrorToast("Failed to load product data. Please try again later.");
+                    showErrorToast("Could not load product. Please try again.");
                 }
             } finally {
                 if (isMounted) {
@@ -88,7 +88,7 @@ function EditProduct({ onProductUpdate }) {
         }
 
         if (file.size > 5 * 1024 * 1024) {
-            showErrorToast("Image size should be less than 5MB");
+            showErrorToast("Image must be under 5MB.");
             inputElement.value = "";
             setImage(null);
             setImagePreview(null);
@@ -96,7 +96,7 @@ function EditProduct({ onProductUpdate }) {
         }
 
         if (!file.type.startsWith("image/")) {
-            showErrorToast("Please upload a valid image file (JPG, PNG, etc.)");
+            showErrorToast("Please upload an image (JPG, PNG, WebP).");
             inputElement.value = "";
             setImage(null);
             setImagePreview(null);
@@ -108,10 +108,10 @@ function EditProduct({ onProductUpdate }) {
 
         img.onload = () => {
             if (img.width > 1920 || img.height > 1080) {
-                showErrorToast("Image dimensions exceed the allowed limit (max 1920x1080px)");
+                showErrorToast("Image must be 1920x1080 or smaller.");
                 setErrors((currentErrors) => ({
                     ...currentErrors,
-                    image: "Image dimensions exceed the allowed limit (max 1920x1080px)",
+                    image: "Image must be 1920x1080 or smaller.",
                 }));
                 setImage(null);
                 setImagePreview(null);
@@ -131,7 +131,7 @@ function EditProduct({ onProductUpdate }) {
         };
 
         img.onerror = () => {
-            showErrorToast("Failed to load image for validation");
+            showErrorToast("Could not read image. Please try another.");
             setImage(null);
             setImagePreview(null);
             inputElement.value = "";
@@ -148,7 +148,7 @@ function EditProduct({ onProductUpdate }) {
         setErrors(nextErrors);
 
         if (Object.keys(nextErrors).length > 0) {
-            showErrorToast("Please fix the errors in the form before submitting.");
+            showErrorToast("Please fill in all required fields.");
             return;
         }
 
@@ -160,7 +160,7 @@ function EditProduct({ onProductUpdate }) {
             onProductUpdate?.();
             setTimeout(() => navigate("/products"), 1500);
         } catch (error) {
-            showErrorToast(getFriendlyProductErrorMessage(error, "Failed to update product. Please try again."));
+            showErrorToast(getFriendlyProductErrorMessage(error, "Could not update product. Please try again."));
         } finally {
             setLoading(false);
         }
@@ -169,11 +169,11 @@ function EditProduct({ onProductUpdate }) {
     return (
         <ProductForm
             title="Edit Product"
-            submitLabel="Update Product"
-            loadingLabel="Updating Product..."
+            submitLabel="Save Changes"
+            loadingLabel="Saving..."
             product={product}
             imagePreview={imagePreview}
-            previewLabel={image ? "New Image Preview" : imagePreview ? "Current Image" : undefined}
+            previewLabel={image ? "New image" : imagePreview ? "Current image" : undefined}
             errors={errors}
             loading={loading}
             onChange={handleChange}

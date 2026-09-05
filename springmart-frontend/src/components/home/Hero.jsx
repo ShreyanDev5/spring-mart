@@ -6,12 +6,12 @@ const Hero = () => {
     <section className={styles.hero}>
       <div className={styles.heroContent}>
         <h1 className={styles.heroTitle}>
-          Curated essentials,<br />
-          engineered simply.
+          Everyday products,<br />
+          kept simple.
         </h1>
         
         <p className={styles.heroSubtitle}>
-          A minimal catalog featuring instant multi-field search and real-time inventory.
+          Browse items, check live stock, and find what you need.
         </p>
       </div>
     </section>

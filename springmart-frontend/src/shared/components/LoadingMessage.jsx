@@ -4,8 +4,8 @@ import styles from "../../styles/components/LoadingMessage.module.scss";
 
 function LoadingMessage({
     onDismiss,
-    message = "Waking up backend server...",
-    subtitle = "Render free tier spins down when idle • First load may take 60–120s",
+    message = "Connecting to server...",
+    subtitle = "Free server wakes up on first load. This can take 1–2 minutes.",
 }) {
     const [isVisible, setIsVisible] = useState(true);
 
@@ -43,7 +43,7 @@ function LoadingMessage({
                     <button
                         className={styles.dismissButton}
                         onClick={handleDismiss}
-                        aria-label="Dismiss loading message"
+                        aria-label="Dismiss"
                     >
                         <FiX />
                     </button>

@@ -50,7 +50,7 @@ function AddProduct({ onProductUpdate }) {
         }
 
         if (file.size > 5 * 1024 * 1024) {
-            showErrorToast("Image size should be less than 5MB");
+            showErrorToast("Image must be under 5MB.");
             inputElement.value = "";
             setImage(null);
             setImagePreview(null);
@@ -58,7 +58,7 @@ function AddProduct({ onProductUpdate }) {
         }
 
         if (!file.type.startsWith("image/")) {
-            showErrorToast("Please upload a valid image file (JPG, PNG, etc.)");
+            showErrorToast("Please upload an image (JPG, PNG, WebP).");
             inputElement.value = "";
             setImage(null);
             setImagePreview(null);
@@ -70,10 +70,10 @@ function AddProduct({ onProductUpdate }) {
 
         img.onload = () => {
             if (img.width > 1920 || img.height > 1080) {
-                showErrorToast("Image dimensions exceed the allowed limit (max 1920x1080px)");
+                showErrorToast("Image must be 1920x1080 or smaller.");
                 setErrors((currentErrors) => ({
                     ...currentErrors,
-                    image: "Image dimensions exceed the allowed limit (max 1920x1080px)",
+                    image: "Image must be 1920x1080 or smaller.",
                 }));
                 setImage(null);
                 setImagePreview(null);
@@ -93,7 +93,7 @@ function AddProduct({ onProductUpdate }) {
         };
 
         img.onerror = () => {
-            showErrorToast("Failed to load image for validation");
+            showErrorToast("Could not read image. Please try another.");
             setImage(null);
             setImagePreview(null);
             inputElement.value = "";
@@ -112,7 +112,7 @@ function AddProduct({ onProductUpdate }) {
         setErrors(nextErrors);
 
         if (Object.keys(nextErrors).length > 0) {
-            showErrorToast("Please fix the errors in the form before submitting.");
+            showErrorToast("Please fill in all required fields.");
             return;
         }
 
@@ -122,7 +122,7 @@ function AddProduct({ onProductUpdate }) {
             const response = await createProduct(buildProductFormData(product, image));
 
             if (response.status === 201) {
-                showSuccessToast("Product added successfully!");
+                showSuccessToast("Product added.");
                 onProductUpdate?.();
 
                 if (imagePreview?.startsWith("blob:")) {
@@ -136,7 +136,7 @@ function AddProduct({ onProductUpdate }) {
                 setTimeout(() => navigate("/products"), 2000);
             }
         } catch (error) {
-            showErrorToast(getFriendlyProductErrorMessage(error, "Failed to add product. Please try again."));
+            showErrorToast(getFriendlyProductErrorMessage(error, "Could not add product. Please try again."));
         } finally {
             setLoading(false);
         }
@@ -144,9 +144,9 @@ function AddProduct({ onProductUpdate }) {
 
     return (
         <ProductForm
-            title="Add New Product"
+            title="Add Product"
             submitLabel="Add Product"
-            loadingLabel="Adding Product..."
+            loadingLabel="Adding..."
             product={product}
             imagePreview={imagePreview}
             errors={errors}

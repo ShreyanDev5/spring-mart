@@ -87,7 +87,7 @@ function ConfirmationModal({
                         onClick={onConfirm}
                         disabled={loading}
                     >
-                        {loading ? "Processing..." : confirmText}
+                        {loading ? "Please wait..." : confirmText}
                     </button>
                 </div>
             </div>

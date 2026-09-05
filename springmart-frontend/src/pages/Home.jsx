@@ -37,7 +37,7 @@ function Home({ searchQuery = "", onClearSearch, resetToken = 0, imageVersion, r
                             }
                         }, 8000);
                     } else {
-                        setError("Failed to load products.");
+                        setError("Could not load products.");
                         setProducts([]);
                         setLoading(false);
                     }

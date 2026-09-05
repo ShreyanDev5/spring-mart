@@ -30,7 +30,7 @@ function ToastContent({ type, message, closeToast }) {
                         toast.dismiss();
                     }
                 }}
-                aria-label="Close notification"
+                aria-label="Close"
             >
                 <FiX />
             </button>

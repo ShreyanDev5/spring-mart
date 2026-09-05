@@ -4,7 +4,7 @@ import styles from "../../styles/components/UIStates.module.scss";
 
 export function EmptyState({
     title = "No items found",
-    description = "There are no items to display at this time.",
+    description = "No items to show.",
     action,
     icon: Icon = FiShoppingBag,
 }) {
@@ -26,7 +26,7 @@ export function EmptyState({
 
 export function ErrorState({
     title = "Something went wrong",
-    description = "An error occurred while loading the content. Please try again.",
+    description = "Could not load content. Please try again.",
     onRetry,
 }) {
     return (
@@ -39,7 +39,7 @@ export function ErrorState({
             {onRetry && (
                 <button className={styles.actionButton} onClick={onRetry}>
                     <FiRefreshCw className={styles.buttonIcon} />
-                    Try Again
+                    Try again
                 </button>
             )}
         </div>

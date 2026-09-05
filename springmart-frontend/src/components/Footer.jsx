@@ -10,7 +10,7 @@ const Footer = () => {
         <div className={styles.left}>
           <span className={styles.brand}>SpringMart</span>
           <span className={styles.dot}>•</span>
-          <span className={styles.tagline}>Curated showcase catalog</span>
+          <span className={styles.tagline}>Product catalog</span>
         </div>
 
         <div className={styles.right}>

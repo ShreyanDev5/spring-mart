@@ -30,9 +30,10 @@ function ProductForm({
     }, []);
 
     return (
-        <div className={`${styles.addProductContainer} ${loading ? styles.loading : ""}`}>
-            <h2 className={styles.formTitle}>{title}</h2>
-            <form onSubmit={onSubmit} className={styles.productForm} noValidate>
+        <div className={styles.pageWrapper}>
+            <h1 className={styles.pageTitle}>{title}</h1>
+            <div className={`${styles.addProductContainer} ${loading ? styles.loading : ""}`}>
+                <form onSubmit={onSubmit} className={styles.productForm} noValidate>
                 <div className={styles.formColumns}>
                     {/* Left Column: Essential Product Data */}
                     <div className={styles.columnLeft}>
@@ -43,7 +44,7 @@ function ProductForm({
                                 name="name"
                                 value={product.name}
                                 onChange={onChange}
-                                placeholder="e.g. Wireless Noise-Cancelling Headphones"
+                                placeholder="e.g. Wireless Headphones"
                                 required
                                 className={`${styles.styledInput} ${errors.name ? styles.invalid : ""}`}
                                 aria-describedby={errors.name ? "name-error" : undefined}
@@ -77,7 +78,7 @@ function ProductForm({
                                         aria-haspopup="listbox"
                                         aria-expanded={isDropdownOpen}
                                     >
-                                        <span>{product.category || "Select Category"}</span>
+                                        <span>{product.category || "Select category"}</span>
                                         <FiChevronDown className={styles.arrowIcon} />
                                     </button>
                                     {isDropdownOpen && (
@@ -91,7 +92,7 @@ function ProductForm({
                                                     setIsDropdownOpen(false);
                                                 }}
                                             >
-                                                Select Category
+                                                Select category
                                             </li>
                                             {PRODUCT_CATEGORIES.map((category) => (
                                                 <li
@@ -165,7 +166,7 @@ function ProductForm({
                                 name="description"
                                 value={product.description}
                                 onChange={onChange}
-                                placeholder="Key product specifications and highlights..."
+                                placeholder="Add a brief description..."
                                 maxLength="500"
                                 className={styles.styledTextarea}
                                 aria-describedby="description-info"
@@ -190,7 +191,7 @@ function ProductForm({
                                     <div className={styles.uploadIconBadge}>
                                         <FiUploadCloud className={styles.uploadIcon} />
                                     </div>
-                                    <span className={styles.uploadTitle}>Choose image or drop file</span>
+                                    <span className={styles.uploadTitle}>Choose or drop an image</span>
                                     <span className={styles.uploadSpecs}>JPG, PNG, WebP • Max 5MB</span>
                                 </label>
                             </div>
@@ -245,7 +246,7 @@ function ProductForm({
                                     }}
                                 >
                                     <span className={styles.statusText}>
-                                        {product.inStock ? "In Stock" : "Out of Stock"}
+                                        {product.inStock ? "In stock" : "Out of stock"}
                                     </span>
                                     <div className={styles.toggleTrack}>
                                         <span className={styles.toggleThumb}></span>
@@ -256,7 +257,7 @@ function ProductForm({
 
                         <div className={styles.actionSection}>
                             <p className={styles.publishNotice}>
-                                Product will publish live to the catalog immediately.
+                                Changes appear in the catalog right away.
                             </p>
                             <button
                                 type="submit"
@@ -278,6 +279,7 @@ function ProductForm({
                 </div>
             </form>
         </div>
+    </div>
     );
 }
 

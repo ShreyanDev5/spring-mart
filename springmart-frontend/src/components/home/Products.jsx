@@ -57,7 +57,7 @@ const Products = React.forwardRef(({
                 className={styles.secondaryActionBtn}
                 onClick={() => setSelectedCategory("All")}
               >
-                View in All Categories ({products.length})
+                View all categories ({products.length})
               </button>
             )}
             <button 
@@ -99,8 +99,8 @@ const Products = React.forwardRef(({
             <div className={styles.loadingWrapper}>
               <div className={styles.loadingContainer}>
                 <LoadingMessage 
-                  message={searchQuery ? `Searching for "${searchQuery}"...` : "Waking up backend server..."} 
-                  subtitle={searchQuery ? "Filtering catalog items..." : "Render free tier spins down when idle • First load takes 60–120s"}
+                  message={searchQuery ? `Searching for "${searchQuery}"...` : "Connecting to server..."} 
+                  subtitle={searchQuery ? "Looking for matching products..." : "Free server wakes up on first load. This can take 1–2 minutes."}
                   onRetry={onRetry}
                 />
               </div>
@@ -111,7 +111,7 @@ const Products = React.forwardRef(({
           </>
         ) : error ? (
           <div className={styles.errorState}>
-            <p>Failed to load products. Please try again.</p>
+            <p>Could not load products. Please try again.</p>
             {onRetry && (
               <button className={styles.retryButton} onClick={onRetry}>
                 Retry
@@ -123,15 +123,15 @@ const Products = React.forwardRef(({
             {searchQuery ? (
               products.length > 0 ? (
                 <>
-                  <h3>No "{searchQuery}" found in {selectedCategory}</h3>
-                  <p>We found {products.length} matching product{products.length === 1 ? "" : "s"} in other categories.</p>
+                  <h3>No results for "{searchQuery}" in {selectedCategory}</h3>
+                  <p>Found {products.length} match{products.length === 1 ? "" : "es"} in other categories.</p>
                   <div className={styles.emptyStateActions}>
                     <button 
                       type="button" 
                       className={styles.primaryActionBtn} 
                       onClick={() => setSelectedCategory("All")}
                     >
-                      View in All Categories ({products.length})
+                      View all categories ({products.length})
                     </button>
                     <button 
                       type="button" 
@@ -144,23 +144,23 @@ const Products = React.forwardRef(({
                 </>
               ) : (
                 <>
-                  <h3>No products found for "{searchQuery}"</h3>
-                  <p>We couldn't find any products in our catalog matching your search across all categories.</p>
+                  <h3>No products found</h3>
+                  <p>Nothing matched "{searchQuery}". Try another search term.</p>
                   <div className={styles.emptyStateActions}>
                     <button 
                       type="button" 
                       className={styles.primaryActionBtn} 
                       onClick={onClearSearch}
                     >
-                      Clear search & view all products
+                      Clear search
                     </button>
                   </div>
                 </>
               )
             ) : (
               <>
-                <h3>No products in "{selectedCategory}"</h3>
-                <p>There are no products listed in this category at this time.</p>
+                <h3>No products in {selectedCategory}</h3>
+                <p>Nothing has been added to this category yet.</p>
                 {selectedCategory !== "All" && (
                   <div className={styles.emptyStateActions}>
                     <button 
@@ -168,7 +168,7 @@ const Products = React.forwardRef(({
                       className={styles.primaryActionBtn} 
                       onClick={() => setSelectedCategory("All")}
                     >
-                      Show All Categories
+                      Show all categories
                     </button>
                   </div>
                 )}

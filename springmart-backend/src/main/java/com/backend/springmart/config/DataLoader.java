@@ -61,7 +61,7 @@ public class DataLoader
                         new Product(
                                 0,
                                 "Wireless Mouse",
-                                799,
+                                1199,
                                 "Ergonomic mouse with USB receiver",
                                 "Electronics",
                                 50,
@@ -74,7 +74,7 @@ public class DataLoader
                         new Product(
                                 0,
                                 "Mechanical Keyboard",
-                                1999,
+                                7499,
                                 "RGB backlit mechanical keyboard",
                                 "Electronics",
                                 30,
@@ -87,7 +87,7 @@ public class DataLoader
                         new Product(
                                 0,
                                 "Gaming Headset",
-                                2999,
+                                4499,
                                 "Over-ear gaming headset with mic",
                                 "Electronics",
                                 20,
@@ -100,7 +100,7 @@ public class DataLoader
                         new Product(
                                 0,
                                 "Leather Bag for Women",
-                                2499,
+                                8999,
                                 "Premium leather handbag for women",
                                 "Fashion",
                                 15,
@@ -113,7 +113,7 @@ public class DataLoader
                         new Product(
                                 0,
                                 "Whoop Fitness Band",
-                                3499,
+                                24999,
                                 "Advanced fitness and health tracker band",
                                 "Health",
                                 25,
@@ -165,7 +165,7 @@ public class DataLoader
                         new Product(
                                 0,
                                 "Puma Running Shoes",
-                                2999,
+                                3499,
                                 "Lightweight running shoes for men",
                                 "Sports",
                                 28,
@@ -202,14 +202,25 @@ public class DataLoader
                                 || existing.getImageData() == null
                                 || existing.getImageData().length == 0;
 
+                        boolean needsPriceUpdate = existing.getPrice() != demo.getPrice();
+
                         if (needsImageUpdate && demo.getImageData() != null)
                         {
                             existing.setImageName(demo.getImageName());
                             existing.setImageType(demo.getImageType());
                             existing.setImageData(demo.getImageData());
+                        }
+
+                        if (needsPriceUpdate)
+                        {
+                            existing.setPrice(demo.getPrice());
+                        }
+
+                        if (needsImageUpdate || needsPriceUpdate)
+                        {
                             productRepository.save(existing);
                             modified = true;
-                            System.out.println("🔄 Updated seed image for product: " + existing.getName() + " -> " + demo.getImageName());
+                            System.out.println("🔄 Synchronized demo product: " + existing.getName() + " (price: " + existing.getPrice() + ")");
                         }
                     }
                     else
