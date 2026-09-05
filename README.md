@@ -9,9 +9,20 @@ Full-stack e-commerce app built with a Java (Spring Boot) REST API and React fro
 
 ## Preview
 
-| Home Page | Product Details | Add / Edit Product |
-| :---: | :---: | :---: |
-| <img src="public/home_page.png" width="280" alt="Home Page"> | <img src="public/product_page.png" width="280" alt="Product Details"> | <img src="public/add_page.png" width="200" alt="Add Product"> |
+### Home
+Minimalist product showcase with hero section and real-time inventory status.
+
+![Home Page](public/home_page.png)
+
+### Catalog & Filters
+Multi-field search with category filters across all inventory.
+
+![Product Catalog](public/product_page.png)
+
+### Add & Manage Products
+Multipart form with validation, category selector, and image dropzone.
+
+![Add Product](public/add_page.png)
 
 ---
 
