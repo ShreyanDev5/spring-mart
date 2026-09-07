@@ -9,7 +9,7 @@ const Footer = () => {
       <div className={styles.footerContent}>
         <div className={styles.left}>
           <span className={styles.brand}>SpringMart</span>
-          <span className={styles.dot}>•</span>
+          <span className={styles.dot} aria-hidden="true">•</span>
           <span className={styles.tagline}>Product catalog</span>
         </div>
 
@@ -24,7 +24,7 @@ const Footer = () => {
             <span>Shreyan Sardar</span>
             <FiArrowUpRight className={styles.icon} />
           </a>
-          <span className={styles.divider}>/</span>
+          <span className={styles.divider} aria-hidden="true">/</span>
           <a
             href="https://github.com/ShreyanDev5/spring-mart"
             target="_blank"
