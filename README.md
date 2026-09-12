@@ -1,9 +1,8 @@
-# <img src="public/logo.svg" width="28" height="28" style="vertical-align: middle;" /> SpringMart
+# SpringMart
 
 Full-stack product catalog built with Spring Boot and React. Features product management, multi-field search, pagination, and direct image streaming.
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-springmart.netlify.app-00ad9f?style=flat-square&logo=netlify&logoColor=white)](https://springmart.netlify.app/)
-[![API Status](https://img.shields.io/badge/API_Status-Render_Live-46E3B7?style=flat-square&logo=render&logoColor=121212)](https://springmart-backend.onrender.com/api/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-springmart.netlify.app-00ad9f?style=flat-square)](https://springmart.netlify.app/)
 
 ---
 
@@ -68,34 +67,6 @@ Base path: `/api`
 
 ---
 
-## Project Structure
-
-```text
-spring-mart/
-├── springmart-backend/
-│   ├── src/main/java/com/backend/springmart/
-│   │   ├── config/             # CORS & app configuration
-│   │   ├── controller/         # REST API endpoints
-│   │   ├── dto/                # Request & response records
-│   │   ├── model/              # JPA entities
-│   │   ├── repository/         # Data repositories
-│   │   └── service/            # Business logic & image handling
-│   ├── src/main/resources/     # Application config & seed images
-│   ├── Dockerfile              # Backend container build
-│   └── pom.xml
-├── springmart-frontend/
-│   ├── src/
-│   │   ├── components/         # Shared UI components
-│   │   ├── features/           # Product pages and form logic
-│   │   ├── styles/             # Sass design tokens & styles
-│   │   └── App.jsx             # Client routes & shell
-│   └── package.json
-├── docker-compose.yml
-└── README.md
-```
-
----
-
 ## Getting Started
 
 ### Prerequisites
@@ -103,25 +74,29 @@ spring-mart/
 - Node.js 20+
 - Docker (optional)
 
-### Backend
+### Option 1: Docker (Fastest)
+
+```bash
+docker compose up --build
+```
+
+### Option 2: Local Setup
+
+**Backend**
 ```bash
 cd springmart-backend
-./mvnw spring-boot:run   # Windows: .\mvnw.cmd spring-boot:run
+./mvnw spring-boot:run
 ```
-API runs at `http://localhost:8080` (H2 Console: `/h2-console`).
+> **Windows:** `.\mvnw.cmd spring-boot:run`  
+> API runs at `http://localhost:8080` (H2 Console: `/h2-console`).
 
-### Frontend
+**Frontend**
 ```bash
 cd springmart-frontend
 npm install
 npm start
 ```
-App runs at `http://localhost:3000`.
-
-### Docker
-```bash
-docker compose up --build
-```
+> App runs at `http://localhost:3000`.
 
 ---
 
@@ -134,7 +109,4 @@ docker compose up --build
 
 ## Author
 
-**Shreyan Sardar**
-- [Portfolio](https://shreyandev.vercel.app)
-- [GitHub](https://github.com/ShreyanDev5)
-- [LinkedIn](https://www.linkedin.com/in/shreyansardar/)
+**Shreyan Sardar** — [Portfolio](https://shreyandev.vercel.app) · [GitHub](https://github.com/ShreyanDev5) · [LinkedIn](https://www.linkedin.com/in/shreyansardar/)
