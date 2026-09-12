@@ -52,18 +52,15 @@ HTTP Request ──> ProductController ──> ProductService ──> ProductRep
 
 ## API Reference
 
-Base path: `/api`
-
-| Method | Endpoint | Description | Request Format |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/` | Health check | — |
-| `GET` | `/products?page=0&size=10` | List products (paginated) | Query params (`page`, `size`) |
-| `GET` | `/products/{id}` | Get product by ID | — |
-| `GET` | `/products/search?keyword=...` | Search products | Query param (`keyword`) |
-| `GET` | `/products/image/{id}` | Stream product image | — |
-| `POST` | `/products` | Create product | Multipart (`product` + `imageFile`) |
-| `PUT` | `/products/{id}` | Update product | Multipart (`product` + `imageFile`) |
-| `DELETE`| `/products/{id}` | Delete product | — |
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/products` | Paginated product list (`page`, `size`) |
+| `GET` | `/api/products/{id}` | Get product details by ID |
+| `GET` | `/api/products/search` | Search products by `keyword` |
+| `GET` | `/api/products/image/{id}` | Stream raw image bytes |
+| `POST` | `/api/products` | Create product (`multipart/form-data`) |
+| `PUT` | `/api/products/{id}` | Update product (`multipart/form-data`) |
+| `DELETE` | `/api/products/{id}` | Delete product by ID |
 
 ---
 
