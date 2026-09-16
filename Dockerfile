@@ -30,6 +30,9 @@ FROM eclipse-temurin:21-jre-alpine
   
 # Set the working directory  
 WORKDIR /app  
+
+# Ensure data directory exists for H2 file database
+RUN mkdir -p /app/data
   
 # Copy the jar file from the build stage  
 COPY --from=build /app/target/springmart-0.0.1-SNAPSHOT.jar app.jar  
