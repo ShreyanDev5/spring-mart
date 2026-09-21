@@ -108,7 +108,7 @@ To run the Spring Boot application locally with the default profile:
 ./mvnw spring-boot:run
 ```
 - **API URL**: `http://localhost:8080`
-- **H2 Console**: `http://localhost:8080/h2-console` (JDBC URL: `jdbc:h2:file:./data/springmartdb`, Credentials: `sa`/`password`)
+- **H2 Console**: `http://localhost:8080/h2-console` (JDBC URL: `jdbc:h2:file:./data/springmartdb`, Credentials: `sa` / leave password blank)
 - **Demo Data**: On startup, if the database is empty, `DataLoader` automatically seeds the database with 9 high-quality, realistic demo items.
 
 ### Running Automated Tests

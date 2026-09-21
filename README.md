@@ -1,12 +1,10 @@
 # SpringMart
 
-Full-stack product catalog built with Spring Boot and React. Features product management, multi-field search, pagination, and direct image streaming.
+> Full-stack product catalog built with Spring Boot and React. Features product management, multi-field search, pagination, and direct image streaming.
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-springmart.netlify.app-00ad9f?style=flat-square)](https://springmart.netlify.app/)
 
 ---
-
-## Preview
 
 ### Home
 ![Home Page](public/home_page.png)
@@ -31,7 +29,7 @@ Full-stack product catalog built with Spring Boot and React. Features product ma
 
 ## Tech Stack
 
-- **Backend**: Java 21, Spring Boot 3, Spring Data JPA, H2 Database, Maven
+- **Backend**: Java 21, Spring Boot 3, Spring Data JPA, H2 Database (file-based persistence), Maven
 - **Frontend**: React 19, Sass, React Router
 - **Deployment**: Docker, Netlify, Render
 
@@ -46,7 +44,7 @@ HTTP Request ──> ProductController ──> ProductService ──> ProductRep
 - **Controller**: Handles HTTP endpoints, CORS, and multipart requests.
 - **Service**: Handles business logic, updates, and image processing.
 - **Repository**: Executes custom JPQL search queries.
-- **Database**: H2 database storing product details and image bytes.
+- **Database**: File-based H2 database storing product details and image bytes.
 
 ---
 
